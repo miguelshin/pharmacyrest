@@ -3,6 +3,8 @@ package com.pharmacy.restcontrollers.pharmacy;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,37 +17,55 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pharmacy.models.*;
+import com.pharmacy.repositories.PharmacyJpaRepository;
 import com.pharmacy.restcontrollers.main.MainController;
+import com.pharmacy.services.PharmacyService;
 
 @RestController
 public class PharmacyRestController extends MainController {
-	protected static String ROOT_PATH = "/pharmacy";
+    protected static final String ROOT_PATH = "/pharmacy";
 
-	@RequestMapping("/pharmacy")
+    @Autowired
+    @Qualifier("pharmacyService")
+    private PharmacyService pharmacyService;
 
-	@GetMapping
-    public ResponseEntity<List<Pharmacy>> getPharmacies(String textName) {
-		List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
-        Pharmacy pharmacy = new Pharmacy("12121212", "Farmacia 1", "-", "-");
-        pharmacies.add(pharmacy);
+    @RequestMapping(ROOT_PATH)
+
+    @GetMapping
+    public ResponseEntity<List<Pharmacy>> getPharmacies(@RequestParam(value="textName", required=false) String textName) {
+        List<Pharmacy> pharmacies = pharmacyService.searchPharmacies(textName);
         return new ResponseEntity<List<Pharmacy>>(pharmacies, HttpStatus.OK);
     }
+/*
+ * 
+ * 
 
-	@PostMapping
+    @PostMapping("/employees")
+    Employee newEmployee(@RequestBody Employee newEmployee) {
+        return repository.save(newEmployee);
+    }
+@GetMapping("/employees/{id}")
+    Employee one(@PathVariable Long id) {
+
+        return repository.findById(id)
+            .orElseThrow(() -> new EmployeeNotFoundException(id));
+    }
+ */
+    @PostMapping
     public ResponseEntity<Pharmacy> savePharmacy(String textName) {
         Pharmacy pharmacy = new Pharmacy("12121212", "Farmacia 1", "-", "-");
         return new ResponseEntity<Pharmacy>(pharmacy, HttpStatus.OK);
     }
 
-	@PutMapping
+    @PutMapping
     public ResponseEntity<Pharmacy> updatePharmacy(String textName) {
         Pharmacy pharmacy = new Pharmacy("12121212", "Farmacia 1", "-", "-");
         return new ResponseEntity<Pharmacy>(pharmacy, HttpStatus.OK);
     }
 
-	@DeleteMapping
+    @DeleteMapping
     public ResponseEntity<Void> deletePharmacy(String textName) {
-		List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
+        List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
         Pharmacy pharmacy = new Pharmacy("12121212", "Farmacia 1", "-", "-");
         pharmacies.add(pharmacy);
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
