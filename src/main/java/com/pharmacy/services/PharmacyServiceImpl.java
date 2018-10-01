@@ -39,5 +39,12 @@ public class PharmacyServiceImpl implements PharmacyService {
         Pharmacy pharmacy = PharmacyConverter.pharmacyEntityToModel(pharmacyEntity);
         return pharmacy;
     }
+    
+    @Override
+    public Pharmacy savePharmacy(Pharmacy pharmacy) {
+        PharmacyEntity pharmacyEntity = PharmacyConverter.pharmacyModelToEntity(pharmacy);
+        pharmacyJpaRepository.save(pharmacyEntity);
+        return getPharmacy(pharmacyEntity.getCode());
+    }
 
 }
