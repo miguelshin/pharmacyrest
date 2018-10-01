@@ -20,12 +20,12 @@ import lombok.Setter;
 public class PharmacyEntity {
     @Id
     @GeneratedValue
-    @Column(name="code")
+    @Column(name="code", length=36)
     private String code;
-    @Column(name="name")
+    @Column(name="name", length=75)
     private String name;
-    @Column(name="address")
+    @Column(name="address", length=150)
     private String address;
-    @Column(name="cif")
+    @Column(name="cif", length=9)
     private String cif;
 }

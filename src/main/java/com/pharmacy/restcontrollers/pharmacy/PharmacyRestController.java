@@ -2,6 +2,7 @@ package com.pharmacy.restcontrollers.pharmacy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -54,6 +55,7 @@ public class PharmacyRestController extends MainController {
  */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Pharmacy> savePharmacy(@RequestBody Pharmacy pharmacy) {
+        pharmacy.setCode(UUID.randomUUID().toString());
         Pharmacy savedPharmacy = pharmacyService.savePharmacy(pharmacy);
         return new ResponseEntity<Pharmacy>(savedPharmacy, HttpStatus.ACCEPTED);
     }
