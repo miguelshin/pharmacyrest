@@ -26,7 +26,7 @@ import com.pharmacy.services.PharmacyService;
 @RequestMapping("/pharmacy")
 
 @RestController
-public class PharmacyRestController extends MainController {
+public class PharmacyRestController {
     protected static final String ROOT_PATH = "/pharmacy";
 
     @Autowired

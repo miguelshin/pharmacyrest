@@ -19,7 +19,6 @@ import lombok.Setter;
 @Table(name="pharmacy")
 public class PharmacyEntity {
     @Id
-    @GeneratedValue
     @Column(name="code", length=36)
     private String code;
     @Column(name="name", length=75)
