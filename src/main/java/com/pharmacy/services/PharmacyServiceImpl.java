@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import com.pharmacy.converter.PharmacyConverter;
 import com.pharmacy.entities.PharmacyEntity;
 import com.pharmacy.models.Pharmacy;
-import com.pharmacy.repositories.PharmacyJpaRepository;
-import com.pharmacy.repositories.PharmacyQueryDSLRepository;
+import com.pharmacy.repositories.pharmacy.PharmacyJpaRepository;
+import com.pharmacy.repositories.pharmacy.PharmacyQueryDSLRepository;
 
 @Service("pharmacyService")
 public class PharmacyServiceImpl implements PharmacyService {

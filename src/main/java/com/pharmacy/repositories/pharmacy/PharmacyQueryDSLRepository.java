@@ -1,4 +1,4 @@
-package com.pharmacy.repositories;
+package com.pharmacy.repositories.pharmacy;
 
 import java.util.List;
 

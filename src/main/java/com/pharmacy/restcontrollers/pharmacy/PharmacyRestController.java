@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pharmacy.models.*;
-import com.pharmacy.repositories.PharmacyJpaRepository;
+import com.pharmacy.repositories.pharmacy.PharmacyJpaRepository;
 import com.pharmacy.restcontrollers.main.MainController;
 import com.pharmacy.services.PharmacyService;
 
