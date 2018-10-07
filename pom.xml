@@ -6,7 +6,10 @@
 	<groupId>com.pharmacy</groupId>
 	<artifactId>pharmacy-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<modules>
+		<module>rest</module>
+	</modules>
+	<packaging>pom</packaging>
 
 	<name>Pharmacy APP</name>
 	<description>Pharmacy APP</description>
@@ -25,11 +28,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -92,10 +90,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
 			<plugin>
 		      <groupId>com.mysema.maven</groupId>
 		      <artifactId>apt-maven-plugin</artifactId>
