@@ -7,6 +7,7 @@
 	<artifactId>pharmacy-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
+		<module>auth</module>
 		<module>rest</module>
 	</modules>
 	<packaging>pom</packaging>

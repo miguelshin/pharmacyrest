@@ -15,7 +15,6 @@ com/pharmacy/rest/authentication/jwt/security/JWTAuthorizationFilter.class
 com/pharmacy/rest/converter/PharmacyConverter.class
 com/pharmacy/rest/authentication/jwt/user/UserRepository.class
 com/pharmacy/rest/authentication/jwt/security/Constants.class
-com/pharmacy/rest/authentication/jwt/security/JWTAuthenticationFilter.class
 com/pharmacy/rest/restcontrollers/pharmacy/PharmacyRestController.class
 com/pharmacy/rest/entities/QOrderEntity.class
 com/pharmacy/rest/entities/OrderProductPKEntity.class
