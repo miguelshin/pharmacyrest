@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.pharmacy</groupId>
 	<artifactId>pharmacy-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
+		<module>common-auth</module>
 		<module>auth</module>
 		<module>rest</module>
-	</modules>
+    </modules>
 	<packaging>pom</packaging>
 
 	<name>Pharmacy APP</name>

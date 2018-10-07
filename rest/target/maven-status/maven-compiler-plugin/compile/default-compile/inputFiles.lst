@@ -2,7 +2,6 @@
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/target/generated-sources/java/com/pharmacy/rest/entities/QOrderProductEntity.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/repositories/orderProduct/OrderProductJpaRepository.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/entities/ProductEntity.java
-/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/authentication/jwt/security/Constants.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/services/PharmacyService.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/services/PharmacyServiceImpl.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/restcontrollers/main/MainController.java
@@ -23,11 +22,9 @@
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/authentication/jwt/security/JWTAuthorizationFilter.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/entities/OrderProductPKEntity.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/entities/PharmacyEntity.java
-/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/entities/UserEntity.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/PharmacyApplication.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/target/generated-sources/java/com/pharmacy/rest/entities/QOrderProductPKEntity.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/authentication/jwt/user/UserRepository.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/authentication/jwt/security/WebSecurity.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/converter/PharmacyConverter.java
-/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/target/generated-sources/java/com/pharmacy/rest/entities/QUserEntity.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/target/generated-sources/java/com/pharmacy/rest/entities/QLaboratoryEntity.java

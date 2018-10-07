@@ -3,7 +3,6 @@ com/pharmacy/rest/repositories/pharmacy/PharmacyJpaRepository.class
 com/pharmacy/rest/entities/OrderProductEntity.class
 com/pharmacy/rest/models/Pharmacy.class
 com/pharmacy/rest/entities/QOrderProductPKEntity.class
-com/pharmacy/rest/entities/UserEntity.class
 com/pharmacy/rest/entities/LaboratoryEntity.class
 com/pharmacy/rest/services/PharmacyServiceImpl.class
 com/pharmacy/rest/services/PharmacyService.class
@@ -14,13 +13,11 @@ com/pharmacy/rest/authentication/jwt/user/UserController.class
 com/pharmacy/rest/authentication/jwt/security/JWTAuthorizationFilter.class
 com/pharmacy/rest/converter/PharmacyConverter.class
 com/pharmacy/rest/authentication/jwt/user/UserRepository.class
-com/pharmacy/rest/authentication/jwt/security/Constants.class
 com/pharmacy/rest/restcontrollers/pharmacy/PharmacyRestController.class
 com/pharmacy/rest/entities/QOrderEntity.class
 com/pharmacy/rest/entities/OrderProductPKEntity.class
 com/pharmacy/rest/entities/QPharmacyEntity.class
 com/pharmacy/rest/authentication/jwt/security/WebSecurity.class
-com/pharmacy/rest/entities/QUserEntity.class
 com/pharmacy/rest/repositories/pharmacy/PharmacyQueryDSLRepository.class
 com/pharmacy/rest/repositories/order/OrderJpaRepository.class
 com/pharmacy/rest/entities/PharmacyEntity.class

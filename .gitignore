@@ -1,3 +1,8 @@
+*.jar
+!libs/**/*.jar
+*/target/*.jar
+*.jar
+!libs/**/*.jar
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 

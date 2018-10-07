@@ -1,6 +1,6 @@
 package com.pharmacy.rest.authentication.jwt.security;
 
-import static com.pharmacy.rest.authentication.jwt.security.Constants.LOGIN_URL;
+import static com.pharmacy.common.authentication.utils.Constants.LOGIN_URL;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,7 +46,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests().antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
 			.anyRequest().authenticated().and()
-				.addFilter(new JWTAuthorizationFilter(authenticationManager()));
+			.addFilter(new JWTAuthorizationFilter(authenticationManager()));
 	}
 
 	@Override

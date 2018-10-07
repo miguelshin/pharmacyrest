@@ -1,4 +1,5 @@
-package com.pharmacy.rest.authentication.jwt.security;
+package com.pharmacy.common.authentication.utils;
+
 
 public class Constants {
 

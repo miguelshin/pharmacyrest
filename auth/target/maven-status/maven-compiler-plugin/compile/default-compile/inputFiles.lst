@@ -1,0 +1,7 @@
+/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/jwt.repositories/UserRepository.java
+/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/AuthApplication.java
+/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/jwt.security/JWTAuthorizationFilter.java
+/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/jwt.security/JWTAuthenticationFilter.java
+/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/jwt.security/WebSecurity.java
+/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/jwt.user/UserDetailsServiceImpl.java
+/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/jwt.user/UserController.java

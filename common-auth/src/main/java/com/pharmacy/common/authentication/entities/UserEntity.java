@@ -1,4 +1,4 @@
-package com.pharmacy.rest.entities;
+package com.pharmacy.common.authentication.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

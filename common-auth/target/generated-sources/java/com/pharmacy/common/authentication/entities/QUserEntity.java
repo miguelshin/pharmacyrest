@@ -1,4 +1,4 @@
-package com.pharmacy.rest.entities;
+package com.pharmacy.common.authentication.entities;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -15,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.EntitySerializer")
 public class QUserEntity extends EntityPathBase<UserEntity> {
 
-    private static final long serialVersionUID = 1497659023L;
+    private static final long serialVersionUID = -466509702L;
 
     public static final QUserEntity userEntity = new QUserEntity("userEntity");
 
