@@ -1,11 +1,14 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/pharmacy_db
+    username: postgres
+    password: postgres
   jpa:
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         temp:
@@ -13,4 +16,4 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
 server:
     servlet:
-      context-path: /rest 
+      context-path: /rest
