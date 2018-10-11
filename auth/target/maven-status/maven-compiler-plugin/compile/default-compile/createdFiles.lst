@@ -1,7 +1,6 @@
-com/pharmacy/AuthApplication.class
-com/pharmacy/rest/authentication/jwt/user/UserDetailsServiceImpl.class
-com/pharmacy/rest/authentication/jwt/user/UserController.class
-com/pharmacy/rest/authentication/jwt/security/JWTAuthorizationFilter.class
-com/pharmacy/rest/authentication/jwt/user/UserRepository.class
-com/pharmacy/rest/authentication/jwt/security/WebSecurity.class
-com/pharmacy/rest/authentication/jwt/security/JWTAuthenticationFilter.class
+com/pharmacy/auth/repositories/UserJpaRepository.class
+com/pharmacy/auth/entities/UserEntity.class
+com/pharmacy/auth/entities/QUserEntity.class
+com/pharmacy/auth/controllers/UserController.class
+com/pharmacy/auth/AuthApplication.class
+com/pharmacy/auth/models/User.class
