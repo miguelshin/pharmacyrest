@@ -47,4 +47,24 @@ public class PharmacyServiceImpl implements PharmacyService {
         return getPharmacy(pharmacyEntity.getCode());
     }
 
+    @Override
+    public Pharmacy updatePharmacy(Pharmacy pharmacy) {
+    	PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCode(pharmacy.getCode());
+    	if (pharmacyEntity != null) {
+	        pharmacyJpaRepository.save(pharmacyEntity);
+	        return getPharmacy(pharmacyEntity.getCode());
+    	}
+    	return null;
+    }
+    
+    @Override
+    public boolean deletePharmacy(String code) {
+    	PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCode(code);
+    	if (pharmacyEntity != null) {
+    		pharmacyJpaRepository.delete(pharmacyEntity);
+    		return true;
+    	}
+    	return false;
+    }
+
 }

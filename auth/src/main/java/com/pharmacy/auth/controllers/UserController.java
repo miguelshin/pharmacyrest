@@ -59,7 +59,8 @@ public class UserController {
 	}*/
 
     @RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<String> login(@RequestBody User user) {
+	public ResponseEntity<User> login(@RequestBody User user) {
+    	User userLogin = new User();
 		UserEntity userEntity = userJpaRepository.findByCode("1");
     	userEntity = userJpaRepository.findByUsername(user.getUsername());
 		if ((BCrypt.checkpw(user.getPassword(), userEntity.getPassword()))) { 
@@ -67,9 +68,11 @@ public class UserController {
 		            .setSubject(user.getUsername())
 		            .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
 		            .signWith(SignatureAlgorithm.HS512, SUPER_SECRET_KEY).compact();
-	        return new ResponseEntity<String>(token, HttpStatus.OK);
+		    userLogin.setUsername(user.getPassword());
+		    userLogin.setToken(token);
+	        return new ResponseEntity<User>(userLogin, HttpStatus.OK);
 		}
-        return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<User>(HttpStatus.FORBIDDEN);
 	}
 /*
     @RequestMapping(method = RequestMethod.POST)

@@ -7,12 +7,12 @@ com/pharmacy/rest/entities/LaboratoryEntity.class
 com/pharmacy/rest/auth/JWTAuthorizationFilter.class
 com/pharmacy/rest/services/PharmacyServiceImpl.class
 com/pharmacy/rest/services/PharmacyService.class
+com/pharmacy/rest/controllers/pharmacy/PharmacyRestController.class
 com/pharmacy/rest/entities/QProductEntity.class
 com/pharmacy/rest/repositories/orderProduct/OrderProductJpaRepository.class
 com/pharmacy/rest/auth/WebSecurity.class
-com/pharmacy/rest/restcontrollers/main/MainController.class
+com/pharmacy/rest/controllers/main/MainController.class
 com/pharmacy/rest/converter/PharmacyConverter.class
-com/pharmacy/rest/restcontrollers/pharmacy/PharmacyRestController.class
 com/pharmacy/rest/entities/QOrderEntity.class
 com/pharmacy/rest/entities/OrderProductPKEntity.class
 com/pharmacy/rest/entities/QPharmacyEntity.class
