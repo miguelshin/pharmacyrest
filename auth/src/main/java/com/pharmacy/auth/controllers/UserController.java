@@ -61,8 +61,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<User> login(@RequestBody User user) {
     	User userLogin = new User();
-		UserEntity userEntity = userJpaRepository.findByCode("1");
-    	userEntity = userJpaRepository.findByUsername(user.getUsername());
+		UserEntity userEntity = userJpaRepository.findByUsername(user.getUsername());
 		if ((BCrypt.checkpw(user.getPassword(), userEntity.getPassword()))) { 
 		    String token = Jwts.builder().setIssuedAt(new Date()).setIssuer(ISSUER_INFO)
 		            .setSubject(user.getUsername())

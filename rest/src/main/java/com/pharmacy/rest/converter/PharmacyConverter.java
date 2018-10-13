@@ -11,6 +11,7 @@ public class PharmacyConverter {
         pharmacy.setName(pharmacyEntity.getName());
         pharmacy.setAddress(pharmacyEntity.getAddress());
         pharmacy.setCif(pharmacyEntity.getCif());
+        //pharmacy.setUserCode(pharmacyEntity.getUserCode());
         
         return pharmacy;
     }
@@ -21,6 +22,7 @@ public class PharmacyConverter {
         pharmacyEntity.setName(pharmacy.getName());
         pharmacyEntity.setAddress(pharmacy.getAddress());
         pharmacyEntity.setCif(pharmacy.getCif());
+        pharmacyEntity.setUserCode(pharmacy.getUserCode());
         
         return pharmacyEntity;
     }

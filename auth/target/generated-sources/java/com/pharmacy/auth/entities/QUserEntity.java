@@ -19,8 +19,6 @@ public class QUserEntity extends EntityPathBase<UserEntity> {
 
     public static final QUserEntity userEntity = new QUserEntity("userEntity");
 
-    public final StringPath code = createString("code");
-
     public final StringPath password = createString("password");
 
     public final StringPath username = createString("username");

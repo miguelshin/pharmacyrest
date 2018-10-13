@@ -23,6 +23,8 @@ public class QLaboratoryEntity extends EntityPathBase<LaboratoryEntity> {
 
     public final StringPath name = createString("name");
 
+    public final StringPath userCode = createString("userCode");
+
     public QLaboratoryEntity(String variable) {
         super(LaboratoryEntity.class, forVariable(variable));
     }

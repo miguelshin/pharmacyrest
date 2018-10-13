@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.pharmacy.rest.converter.PharmacyConverter;
@@ -25,7 +27,8 @@ public class PharmacyServiceImpl implements PharmacyService {
 
     @Override
     public List<Pharmacy> searchPharmacies(String textName) {
-        List<PharmacyEntity> pharmacyEntities = pharmacyQueryDSLRepository.searchPharmacies(textName);
+    	String userCode = getUserCodeFromAuthentication();
+        List<PharmacyEntity> pharmacyEntities = pharmacyQueryDSLRepository.searchPharmacies(textName, userCode);
         List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
         for (PharmacyEntity pharmacyEntity : pharmacyEntities) {
             pharmacies.add(PharmacyConverter.pharmacyEntityToModel(pharmacyEntity));
@@ -34,25 +37,28 @@ public class PharmacyServiceImpl implements PharmacyService {
     }
     
     @Override
-    public Pharmacy getPharmacy(String code) {
-        PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCode(code);
+    public Pharmacy getPharmacy(String code, String userCode) {
+        PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCodeAndUserCode(code, userCode);
         Pharmacy pharmacy = PharmacyConverter.pharmacyEntityToModel(pharmacyEntity);
         return pharmacy;
     }
     
     @Override
     public Pharmacy savePharmacy(Pharmacy pharmacy) {
+    	String userCode = getUserCodeFromAuthentication();
+    	pharmacy.setUserCode(userCode);
         PharmacyEntity pharmacyEntity = PharmacyConverter.pharmacyModelToEntity(pharmacy);
         pharmacyJpaRepository.save(pharmacyEntity);
-        return getPharmacy(pharmacyEntity.getCode());
+        return getPharmacy(pharmacyEntity.getCode(), userCode);
     }
 
     @Override
     public Pharmacy updatePharmacy(Pharmacy pharmacy) {
-    	PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCode(pharmacy.getCode());
+    	String userCode = getUserCodeFromAuthentication();
+    	PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCodeAndUserCode(pharmacy.getCode(), userCode);
     	if (pharmacyEntity != null) {
 	        pharmacyJpaRepository.save(pharmacyEntity);
-	        return getPharmacy(pharmacyEntity.getCode());
+	        return getPharmacy(pharmacyEntity.getCode(), userCode);
     	}
     	return null;
     }
@@ -67,4 +73,8 @@ public class PharmacyServiceImpl implements PharmacyService {
     	return false;
     }
 
+    private String getUserCodeFromAuthentication() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (String) authentication.getPrincipal();
+    }
 }

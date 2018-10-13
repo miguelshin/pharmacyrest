@@ -19,12 +19,12 @@ public class PharmacyQueryDSLRepository {
     @PersistenceContext
     private EntityManager em;
     
-    public List<PharmacyEntity> searchPharmacies(String textName) {
+    public List<PharmacyEntity> searchPharmacies(String textName, String userCode) {
         List<PharmacyEntity> pharmacies = null;
         JPAQuery<PharmacyEntity> query = new JPAQuery<PharmacyEntity>(em);
         BooleanBuilder predicateBuilder = null;
         if (textName != null && !textName.isEmpty()) {
-            predicateBuilder = new BooleanBuilder(qc.name.contains(textName));
+            predicateBuilder = new BooleanBuilder(qc.name.containsIgnoreCase(textName)).and(qc.userCode.equalsIgnoreCase(userCode));
             pharmacies = query.select(qc).from(qc).where(predicateBuilder).fetch();
         } else {
             pharmacies = query.select(qc).from(qc).fetch();

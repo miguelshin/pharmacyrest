@@ -24,7 +24,7 @@ import com.pharmacy.rest.services.PharmacyService;
 @RestController
 public class PharmacyRestController {
     protected static final String ROOT_PATH = "/pharmacy";
-
+    protected static final String DELETE_ROOT_PATH = "/{code}";
     @Autowired
     @Qualifier("pharmacyService")
     private PharmacyService pharmacyService;
@@ -53,7 +53,7 @@ public class PharmacyRestController {
         }
     }
 
-    @RequestMapping(value = "/{code}", method = RequestMethod.DELETE)
+    @RequestMapping(value = DELETE_ROOT_PATH, method = RequestMethod.DELETE)
     public ResponseEntity<Void> deletePharmacy(@PathVariable(value="code") String code) {
     	if (pharmacyService.deletePharmacy(code)) {
     		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

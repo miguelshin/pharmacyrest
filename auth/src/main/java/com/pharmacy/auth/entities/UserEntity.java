@@ -18,8 +18,6 @@ import lombok.Setter;
 @Table(name="userapp")
 public class UserEntity {
     @Id
-    @Column(name="code", length=36)
-    private String code;
     @Column(name="username", length=30)
     private String username;
     @Column(name="password", length=60)

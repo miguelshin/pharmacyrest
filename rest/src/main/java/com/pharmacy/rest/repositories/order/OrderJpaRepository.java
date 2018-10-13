@@ -7,11 +7,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.pharmacy.rest.entities.OrderEntity;
+import com.pharmacy.rest.entities.CashOrderEntity;
 import com.pharmacy.rest.entities.PharmacyEntity;;
 
 @Repository("orderJpaRepository")
-public interface OrderJpaRepository extends JpaRepository<OrderEntity, Serializable>{
-    public abstract OrderEntity findByCode(String code);
-    public abstract List<OrderEntity> findByPharmacyCodeAndDate(String pharmacyCode, Date date);
+public interface OrderJpaRepository extends JpaRepository<CashOrderEntity, Serializable>{
+    public abstract CashOrderEntity findByCode(String code);
+    public abstract List<CashOrderEntity> findByPharmacyCodeAndDate(String pharmacyCode, Date date);
 }

@@ -1,12 +1,12 @@
 package com.pharmacy.rest.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -19,16 +19,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="cashorder")
-public class OrderEntity implements Serializable {
-    @Id
-    @Column(name="code", length=36)
-    private String code;
-    @Column(name="name", length=75)
-    private String name;
-    @Column(name="date")
-    private String date;
-    @ManyToOne
-    private PharmacyEntity pharmacy;
-
+@Table(name="cashorder_product")
+public class CashOrderProductEntity {
+    @EmbeddedId
+    private CashOrderProductPKEntity id;
+    @Column(name="quantity")
+    private int quantity;
+    @Column(name="amount")
+    private double amount;
 }
