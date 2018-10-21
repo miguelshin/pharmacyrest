@@ -1,4 +1,4 @@
-package com.pharmacy.rest.services;
+package com.pharmacy.rest.services.pharmacy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +37,9 @@ public class PharmacyServiceImpl implements PharmacyService {
     }
     
     @Override
-    public Pharmacy getPharmacy(String code, String userCode) {
-        PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCodeAndUserCode(code, userCode);
+    public Pharmacy getPharmacy(String code) {
+    	String userCode = getUserCodeFromAuthentication();
+    	PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCodeAndUserCode(code, userCode);
         Pharmacy pharmacy = PharmacyConverter.pharmacyEntityToModel(pharmacyEntity);
         return pharmacy;
     }
@@ -49,7 +50,7 @@ public class PharmacyServiceImpl implements PharmacyService {
     	pharmacy.setUserCode(userCode);
         PharmacyEntity pharmacyEntity = PharmacyConverter.pharmacyModelToEntity(pharmacy);
         pharmacyJpaRepository.save(pharmacyEntity);
-        return getPharmacy(pharmacyEntity.getCode(), userCode);
+        return getPharmacy(pharmacyEntity.getCode());
     }
 
     @Override
@@ -58,14 +59,15 @@ public class PharmacyServiceImpl implements PharmacyService {
     	PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCodeAndUserCode(pharmacy.getCode(), userCode);
     	if (pharmacyEntity != null) {
 	        pharmacyJpaRepository.save(pharmacyEntity);
-	        return getPharmacy(pharmacyEntity.getCode(), userCode);
+	        return getPharmacy(pharmacyEntity.getCode());
     	}
     	return null;
     }
     
     @Override
     public boolean deletePharmacy(String code) {
-    	PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCode(code);
+    	String userCode = getUserCodeFromAuthentication();
+    	PharmacyEntity pharmacyEntity = this.pharmacyJpaRepository.findByCodeAndUserCode(code, userCode);
     	if (pharmacyEntity != null) {
     		pharmacyJpaRepository.delete(pharmacyEntity);
     		return true;

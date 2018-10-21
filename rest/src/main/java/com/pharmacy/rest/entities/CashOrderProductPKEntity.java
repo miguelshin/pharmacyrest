@@ -17,7 +17,9 @@ import lombok.Setter;
 @Setter
 @Embeddable
 public class CashOrderProductPKEntity implements Serializable {
-    @ManyToOne
+	private static final long serialVersionUID = 6979837682146236047L;
+	
+	@ManyToOne
     @JoinColumn(name = "cashorder_id")
     private CashOrderEntity cashorder;
     @ManyToOne

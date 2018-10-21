@@ -10,6 +10,6 @@ import com.pharmacy.rest.entities.ProductEntity;;
 
 @Repository("productJpaRepository")
 public interface ProductJpaRepository extends JpaRepository<ProductEntity, Serializable>{
-    public abstract ProductEntity findByCode(String code);
-    public abstract List<ProductEntity> findByLaboratoryCode(String laboratoryCode);
+    public abstract ProductEntity findByCodeAndLaboratoryUserCode(String code, String userCode);
+    public abstract List<ProductEntity> findByLaboratoryCodeAndLaboratoryUserCode(String laboratoryCode, String userCode);
 }

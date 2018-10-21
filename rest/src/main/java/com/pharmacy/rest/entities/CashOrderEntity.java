@@ -1,10 +1,9 @@
 package com.pharmacy.rest.entities;
 
-import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,14 +19,12 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="cashorder")
-public class CashOrderEntity implements Serializable {
+public class CashOrderEntity {
     @Id
     @Column(name="code", length=36)
     private String code;
-    @Column(name="name", length=75)
-    private String name;
     @Column(name="date")
-    private String date;
+    private Date date;
     @ManyToOne
     private PharmacyEntity pharmacy;
 

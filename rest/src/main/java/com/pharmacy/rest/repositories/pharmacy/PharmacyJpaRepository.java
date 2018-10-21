@@ -9,6 +9,5 @@ import com.pharmacy.rest.entities.PharmacyEntity;;
 
 @Repository("pharmacyJpaRepository")
 public interface PharmacyJpaRepository extends JpaRepository<PharmacyEntity, Serializable>{
-    public abstract PharmacyEntity findByCode(String code);
     public abstract PharmacyEntity findByCodeAndUserCode(String code, String userCode);
 }

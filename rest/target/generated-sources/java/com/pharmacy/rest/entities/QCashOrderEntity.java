@@ -24,9 +24,7 @@ public class QCashOrderEntity extends EntityPathBase<CashOrderEntity> {
 
     public final StringPath code = createString("code");
 
-    public final StringPath date = createString("date");
-
-    public final StringPath name = createString("name");
+    public final DateTimePath<java.util.Date> date = createDateTime("date", java.util.Date.class);
 
     public final QPharmacyEntity pharmacy;
 

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pharmacy.rest.models.*;
-import com.pharmacy.rest.services.PharmacyService;
+import com.pharmacy.rest.services.pharmacy.PharmacyService;
 
 @RequestMapping("/pharmacy")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE }) 

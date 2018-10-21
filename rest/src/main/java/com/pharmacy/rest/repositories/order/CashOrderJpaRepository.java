@@ -11,7 +11,10 @@ import com.pharmacy.rest.entities.CashOrderEntity;
 import com.pharmacy.rest.entities.PharmacyEntity;;
 
 @Repository("orderJpaRepository")
-public interface OrderJpaRepository extends JpaRepository<CashOrderEntity, Serializable>{
+public interface CashOrderJpaRepository extends JpaRepository<CashOrderEntity, Serializable>{
     public abstract CashOrderEntity findByCode(String code);
     public abstract List<CashOrderEntity> findByPharmacyCodeAndDate(String pharmacyCode, Date date);
+    public abstract CashOrderEntity findByDate(Date date);
+    public abstract CashOrderEntity findByPharmacy(PharmacyEntity pharmacy);
+
 }

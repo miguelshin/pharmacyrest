@@ -2,10 +2,8 @@ package com.pharmacy.rest.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +22,7 @@ public class LaboratoryEntity {
     private String code;
     @Column(name="name", length=75)
     private String name;
-	@Min(8)
-	private String userCode;
+    @Column(name="user_code", length=36)
+    private String userCode;
 
 }
