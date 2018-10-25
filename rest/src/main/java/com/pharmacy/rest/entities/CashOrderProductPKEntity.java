@@ -21,7 +21,7 @@ public class CashOrderProductPKEntity implements Serializable {
 	
 	@ManyToOne
     @JoinColumn(name = "cashorder_id")
-    private CashOrderEntity cashorder;
+    private CashOrderEntity cashOrder;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductEntity product;

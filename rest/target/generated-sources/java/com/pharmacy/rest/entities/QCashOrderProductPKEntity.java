@@ -22,7 +22,7 @@ public class QCashOrderProductPKEntity extends BeanPath<CashOrderProductPKEntity
 
     public static final QCashOrderProductPKEntity cashOrderProductPKEntity = new QCashOrderProductPKEntity("cashOrderProductPKEntity");
 
-    public final QCashOrderEntity cashorder;
+    public final QCashOrderEntity cashOrder;
 
     public final QProductEntity product;
 
@@ -44,7 +44,7 @@ public class QCashOrderProductPKEntity extends BeanPath<CashOrderProductPKEntity
 
     public QCashOrderProductPKEntity(Class<? extends CashOrderProductPKEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.cashorder = inits.isInitialized("cashorder") ? new QCashOrderEntity(forProperty("cashorder"), inits.get("cashorder")) : null;
+        this.cashOrder = inits.isInitialized("cashOrder") ? new QCashOrderEntity(forProperty("cashOrder"), inits.get("cashOrder")) : null;
         this.product = inits.isInitialized("product") ? new QProductEntity(forProperty("product"), inits.get("product")) : null;
     }
 
