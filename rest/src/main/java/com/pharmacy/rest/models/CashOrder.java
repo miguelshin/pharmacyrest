@@ -25,7 +25,7 @@ public class CashOrder {
 	@NotNull
 	private Date date;
 	@NotNull
-	private List<CashOrderProduct> cashOrderProduct;
+	private List<CashOrderProduct> cashOrderProducts;
 	@NotNull
 	private Pharmacy pharmacy;
 }

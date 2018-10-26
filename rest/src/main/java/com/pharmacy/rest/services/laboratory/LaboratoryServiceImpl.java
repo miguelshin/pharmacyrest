@@ -14,7 +14,6 @@ import com.pharmacy.rest.entities.LaboratoryEntity;
 import com.pharmacy.rest.models.Laboratory;
 import com.pharmacy.rest.repositories.laboratory.LaboratoryJpaRepository;
 import com.pharmacy.rest.repositories.laboratory.LaboratoryQueryDSLRepository;
-import com.pharmacy.rest.repositories.pharmacy.PharmacyQueryDSLRepository;
 
 @Service("laboratoryService")
 public class LaboratoryServiceImpl implements LaboratoryService {

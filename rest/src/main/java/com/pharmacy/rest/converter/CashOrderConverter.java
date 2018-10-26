@@ -15,10 +15,10 @@ public class CashOrderConverter {
         cashOrder.setCode(cashOrderEntity.getCode());
         cashOrder.setDate(cashOrderEntity.getDate());
         cashOrder.setPharmacy(PharmacyConverter.pharmacyEntityToModel(cashOrderEntity.getPharmacy()));
-        cashOrder.setCashOrderProduct(new ArrayList<CashOrderProduct>());
+        cashOrder.setCashOrderProducts(new ArrayList<CashOrderProduct>());
         for (CashOrderProductEntity cashOrderProductEntity : cashOrderProductsEntity) {
-        	CashOrderProduct cashOrderProduct = CashOrderProductConverter.cashOrderEntityToModel(cashOrderProductEntity);
-        	cashOrder.getCashOrderProduct().add(cashOrderProduct);
+        	CashOrderProduct cashOrderProduct = CashOrderProductConverter.cashOrderProductEntityToModel(cashOrderProductEntity);
+        	cashOrder.getCashOrderProducts().add(cashOrderProduct);
         }
         return cashOrder;
     }
