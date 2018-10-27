@@ -3,6 +3,7 @@ package com.pharmacy.rest.services.cashOrder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +15,6 @@ import com.pharmacy.rest.converter.CashOrderConverter;
 import com.pharmacy.rest.converter.CashOrderProductConverter;
 import com.pharmacy.rest.entities.CashOrderEntity;
 import com.pharmacy.rest.entities.CashOrderProductEntity;
-import com.pharmacy.rest.entities.PharmacyEntity;
 import com.pharmacy.rest.models.CashOrder;
 import com.pharmacy.rest.models.CashOrderProduct;
 import com.pharmacy.rest.repositories.cashOrder.CashOrderJpaRepository;
@@ -47,9 +47,8 @@ public class CashOrderServiceImpl implements CashOrderService {
 
     @Override
     public List<CashOrder> searchCashOrders(Date date) {
-    	String userCode = getUserCodeFromAuthentication();
-        List<CashOrderEntity> cashOrderEntities = cashOrderJpaRepository.findByDateAndPharmacyUserCode(date, userCode);
         List<CashOrder> cashOrders = new ArrayList<CashOrder>();
+    	List<CashOrderEntity> cashOrderEntities = checkUserAndGetCashOrderEntities(date);
         for (CashOrderEntity cashOrderEntity : cashOrderEntities) {
         	List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
             cashOrders.add(CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities));
@@ -58,46 +57,44 @@ public class CashOrderServiceImpl implements CashOrderService {
     }
 
     @Override
-    public CashOrder getCashOrder(String code) {
-    	String userCode = getUserCodeFromAuthentication();
-        CashOrderEntity cashOrderEntity = cashOrderJpaRepository.findByCodeAndPharmacyUserCode(code, userCode);
+    public Optional<CashOrder> getCashOrder(String code) {
+		CashOrderEntity cashOrderEntity = checkUserAndGetCashOrderEntity(code);
     	List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
     	CashOrder cashOrder = CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities);
-        return cashOrder;
+        return Optional.of(cashOrder);
     }
     
     @Override
     public CashOrder saveCashOrder(CashOrder cashOrder) {
-    	String userCode = getUserCodeFromAuthentication();
-    	PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCodeAndUserCode(cashOrder.getPharmacy().getCode(), userCode);
-    	if (pharmacyEntity != null) {
+    	if (checkUserIfAccessPharmacyIsGranted(cashOrder.getPharmacy().getCode())) {
     		CashOrderEntity cashOrderEntity = CashOrderConverter.cashOrderModelToEntity(cashOrder);
     		cashOrderJpaRepository.save(cashOrderEntity);
     		for (CashOrderProduct cashOrderProduct : cashOrder.getCashOrderProducts()) {
-    			if (productAllowsToUser(cashOrderProduct.getProduct().getCode(), userCode)) {
+    			if (checkUserIfAccessLaboratoryIsGranted(cashOrderProduct.getProduct().getCode())) {
     				cashOrderProductJpaRepository.save(CashOrderProductConverter.cashOrderProductModelToEntity(cashOrderProduct, cashOrder));
     			}
     		}
-    		return getCashOrder(cashOrder.getCode());
+    		return getCashOrder(cashOrder.getCode()).get();
     	}
     	return null;
     }
     
     @Override
-    public CashOrder updateCashOrder(CashOrder cashOrder) {
-    	String userCode = getUserCodeFromAuthentication();
-		CashOrderEntity cashOrderEntity = cashOrderJpaRepository.findByCodeAndPharmacyUserCode(cashOrder.getCode(), userCode);
+    public Optional<CashOrder> updateCashOrder(CashOrder cashOrder) {
+    	Optional<CashOrder> updatedCashOrder = Optional.empty();
+		CashOrderEntity cashOrderEntity = checkUserAndGetCashOrderEntity(cashOrder.getCode());
     	if (cashOrderEntity != null) {
     		cashOrderEntity = CashOrderConverter.cashOrderModelToEntity(cashOrder);
     		cashOrderJpaRepository.save(cashOrderEntity);
+    		cashOrderProductJpaRepository.deleteByIdCashOrderCode(cashOrderEntity.getCode());
     		for (CashOrderProduct cashOrderProduct : cashOrder.getCashOrderProducts()) {
-    			if (productAllowsToUser(cashOrderProduct.getProduct().getCode(), userCode)) {
+    			if (checkUserIfAccessLaboratoryIsGranted(cashOrderProduct.getProduct().getCode())) {
     				cashOrderProductJpaRepository.save(CashOrderProductConverter.cashOrderProductModelToEntity(cashOrderProduct, cashOrder));
     			}
     		}
-    		cashOrder = getCashOrder(cashOrder.getCode());
+    		updatedCashOrder = getCashOrder(cashOrder.getCode());
     	}
-    	return null;
+    	return updatedCashOrder;
     }
     
     @Override
@@ -114,14 +111,30 @@ public class CashOrderServiceImpl implements CashOrderService {
     	}
     	return false;
     }
+    
+    private boolean checkUserIfAccessPharmacyIsGranted(String pharmacyCode) {
+    	String userCode = getUserCodeFromAuthentication();
+    	return (pharmacyJpaRepository.findByCodeAndUserCode(pharmacyCode, userCode) != null);
+    }
+    
+    private boolean checkUserIfAccessLaboratoryIsGranted(String laboratoryCode) {
+    	String userCode = getUserCodeFromAuthentication();
+    	return (productJpaRepository.findByCodeAndLaboratoryUserCode(laboratoryCode, userCode) != null);
+    }
+
+    private List<CashOrderEntity> checkUserAndGetCashOrderEntities(Date date) {
+		String userCode = getUserCodeFromAuthentication();
+ 		return cashOrderJpaRepository.findByDateAndPharmacyUserCode(date, userCode);
+    }
+    
+    private CashOrderEntity checkUserAndGetCashOrderEntity(String code) {
+    	String userCode = getUserCodeFromAuthentication();
+    	return cashOrderJpaRepository.findByCodeAndPharmacyUserCode(code, userCode);
+    }
 
     private String getUserCodeFromAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (String) authentication.getPrincipal();
     }
     
-    private boolean productAllowsToUser(String productCode, String userCode) {
-		return productJpaRepository.findByCodeAndLaboratoryUserCode(productCode, userCode) != null;   	
-    }
-
 }

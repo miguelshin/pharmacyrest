@@ -17,5 +17,4 @@ public interface CashOrderJpaRepository extends JpaRepository<CashOrderEntity, S
     public abstract CashOrderEntity findByCode(String code);
     public abstract List<CashOrderEntity> findByPharmacyCodeAndDate(String pharmacyCode, Date date);
     public abstract CashOrderEntity findByPharmacy(PharmacyEntity pharmacy);
-
 }

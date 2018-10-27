@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
     
     @Override
     public Product saveProduct(Product product) {
-        if (checkUserIfAccessLaboratoryIfGranted(product.getLaboratory().getCode())) {
+        if (checkUserIfAccessLaboratoryIsGranted(product.getLaboratory().getCode())) {
 	        ProductEntity productEntity = ProductConverter.productModelToEntity(product);
 	        productJpaRepository.save(productEntity);
 	        return getProduct(productEntity.getCode()).get();
@@ -97,7 +97,7 @@ public class ProductServiceImpl implements ProductService {
         return (String) authentication.getPrincipal();
     }
     
-    private boolean checkUserIfAccessLaboratoryIfGranted(String laboratoryCode) {
+    private boolean checkUserIfAccessLaboratoryIsGranted(String laboratoryCode) {
     	String userCode = getUserCodeFromAuthentication();
     	return (productJpaRepository.findByCodeAndLaboratoryUserCode(laboratoryCode, userCode) != null);
     }
