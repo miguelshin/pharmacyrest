@@ -2,6 +2,7 @@ package com.pharmacy.rest.services.pharmacy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,13 +36,18 @@ public class PharmacyServiceImpl implements PharmacyService {
         }
         return pharmacies;
     }
+
+    @Override
+    public PharmacyEntity checkUserAndGetPharmacyEntity(String code) {
+    	String userCode = getUserCodeFromAuthentication();
+    	return pharmacyJpaRepository.findByCodeAndUserCode(code, userCode);
+    }
     
     @Override
-    public Pharmacy getPharmacy(String code) {
-    	String userCode = getUserCodeFromAuthentication();
-    	PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCodeAndUserCode(code, userCode);
+    public Optional<Pharmacy> getPharmacy(String code) {
+    	PharmacyEntity pharmacyEntity = checkUserAndGetPharmacyEntity(code);
         Pharmacy pharmacy = PharmacyConverter.pharmacyEntityToModel(pharmacyEntity);
-        return pharmacy;
+        return Optional.of(pharmacy);
     }
     
     @Override
@@ -50,31 +56,30 @@ public class PharmacyServiceImpl implements PharmacyService {
     	pharmacy.setUserCode(userCode);
         PharmacyEntity pharmacyEntity = PharmacyConverter.pharmacyModelToEntity(pharmacy);
         pharmacyJpaRepository.save(pharmacyEntity);
-        return getPharmacy(pharmacyEntity.getCode());
+        return getPharmacy(pharmacyEntity.getCode()).get();
     }
 
     @Override
-    public Pharmacy updatePharmacy(Pharmacy pharmacy) {
-    	String userCode = getUserCodeFromAuthentication();
-    	PharmacyEntity pharmacyEntity = pharmacyJpaRepository.findByCodeAndUserCode(pharmacy.getCode(), userCode);
+    public Optional<Pharmacy> updatePharmacy(Pharmacy pharmacy) {
+    	Optional<Pharmacy> updatedPharmacy = Optional.empty();
+    	PharmacyEntity pharmacyEntity = checkUserAndGetPharmacyEntity(pharmacy.getCode());
     	if (pharmacyEntity != null) {
 	        pharmacyJpaRepository.save(pharmacyEntity);
-	        return getPharmacy(pharmacyEntity.getCode());
+	        updatedPharmacy = getPharmacy(pharmacyEntity.getCode());
     	}
-    	return null;
+    	return updatedPharmacy;
     }
     
     @Override
     public boolean deletePharmacy(String code) {
-    	String userCode = getUserCodeFromAuthentication();
-    	PharmacyEntity pharmacyEntity = this.pharmacyJpaRepository.findByCodeAndUserCode(code, userCode);
+    	PharmacyEntity pharmacyEntity = checkUserAndGetPharmacyEntity(code);
     	if (pharmacyEntity != null) {
     		pharmacyJpaRepository.delete(pharmacyEntity);
     		return true;
     	}
     	return false;
     }
-
+    
     private String getUserCodeFromAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (String) authentication.getPrincipal();

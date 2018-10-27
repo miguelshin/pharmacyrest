@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(Include.NON_NULL)
-public class Laboratory {
+public class Laboratory extends Model {
 	@NotNull
 	private String code;
 	@NotNull

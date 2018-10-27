@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(Include.NON_NULL)
-public class CashOrderProduct {
+public class CashOrderProduct extends Model {
 	private Product product;
 	private int quantity;
 	private double amount;

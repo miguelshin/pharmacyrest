@@ -2,6 +2,7 @@ package com.pharmacy.rest.services.laboratory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,11 +38,10 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     }
 
     @Override
-    public Laboratory getLaboratory(String code) {
-    	String userCode = getUserCodeFromAuthentication();
-    	LaboratoryEntity laboratoryEntity = laboratoryJpaRepository.findByCodeAndUserCode(code, userCode);
+    public Optional<Laboratory> getLaboratory(String code) {
+    	LaboratoryEntity laboratoryEntity = checkUserAndGetLaboratoryEntity(code);
         Laboratory laboratory = LaboratoryConverter.laboratoryEntityToModel(laboratoryEntity);
-        return laboratory;
+        return Optional.of(laboratory);
     }
     
     @Override
@@ -50,33 +50,38 @@ public class LaboratoryServiceImpl implements LaboratoryService {
         LaboratoryEntity laboratoryEntity = LaboratoryConverter.laboratoryModelToEntity(laboratory);
         laboratoryEntity.setUserCode(userCode);
         laboratoryJpaRepository.save(laboratoryEntity);
-        return getLaboratory(laboratoryEntity.getCode());
+        return getLaboratory(laboratoryEntity.getCode()).get();
     }
 
     @Override
-    public Laboratory updateLaboratory(Laboratory laboratory) {
-    	String userCode = getUserCodeFromAuthentication();
-    	LaboratoryEntity laboratoryEntity = laboratoryJpaRepository.findByCodeAndUserCode(laboratory.getCode(), userCode);
+    public Optional<Laboratory> updateLaboratory(Laboratory laboratory) {
+    	Optional<Laboratory> updatedLaboratory = Optional.empty();
+    	LaboratoryEntity laboratoryEntity = checkUserAndGetLaboratoryEntity(laboratory.getCode());
     	if (laboratoryEntity != null) {
 	        laboratoryJpaRepository.save(laboratoryEntity);
-	        return getLaboratory(laboratoryEntity.getCode());
+	        updatedLaboratory = getLaboratory(laboratoryEntity.getCode());
     	}
-    	return null;
+    	return updatedLaboratory;
     }
     
     @Override
     public boolean deleteLaboratory(String code) {
-    	String userCode = getUserCodeFromAuthentication();
-    	LaboratoryEntity laboratoryEntity = this.laboratoryJpaRepository.findByCodeAndUserCode(code, userCode);
+    	boolean deletedLaboratory = false;
+    	LaboratoryEntity laboratoryEntity = checkUserAndGetLaboratoryEntity(code);
     	if (laboratoryEntity != null) {
     		laboratoryJpaRepository.delete(laboratoryEntity);
-    		return true;
+    		deletedLaboratory = true;
     	}
-    	return false;
+    	return deletedLaboratory;
     }
 
     private String getUserCodeFromAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (String) authentication.getPrincipal();
+    }
+    
+    private LaboratoryEntity checkUserAndGetLaboratoryEntity(String code) {
+    	String userCode = getUserCodeFromAuthentication();
+    	return this.laboratoryJpaRepository.findByCodeAndUserCode(code, userCode);    	
     }
 }

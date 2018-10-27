@@ -2,6 +2,7 @@ package com.pharmacy.rest.services.product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.pharmacy.rest.converter.ProductConverter;
-import com.pharmacy.rest.entities.LaboratoryEntity;
 import com.pharmacy.rest.entities.ProductEntity;
 import com.pharmacy.rest.models.Product;
 import com.pharmacy.rest.repositories.laboratory.LaboratoryJpaRepository;
@@ -54,40 +54,37 @@ public class ProductServiceImpl implements ProductService {
     }
     
     @Override
-    public Product getProduct(String code) {
+    public Optional<Product> getProduct(String code) {
     	String userCode = getUserCodeFromAuthentication();
     	ProductEntity productEntity = productJpaRepository.findByCodeAndLaboratoryUserCode(code, userCode);
         Product product = ProductConverter.productEntityToModel(productEntity);
-        return product;
+        return Optional.of(product);
     }
     
     @Override
     public Product saveProduct(Product product) {
-    	String userCode = getUserCodeFromAuthentication();
-        LaboratoryEntity laboratoryEntity = laboratoryJpaRepository.findByCodeAndUserCode(product.getLaboratory().getCode(), userCode);
-        if (laboratoryEntity != null) {
+        if (checkUserIfAccessLaboratoryIfGranted(product.getLaboratory().getCode())) {
 	        ProductEntity productEntity = ProductConverter.productModelToEntity(product);
 	        productJpaRepository.save(productEntity);
-	        return getProduct(productEntity.getCode());
+	        return getProduct(productEntity.getCode()).get();
         }
         return null;
     }
 
     @Override
-    public Product updateProduct(Product product) {
-    	String userCode = getUserCodeFromAuthentication();
-    	ProductEntity productEntity = productJpaRepository.findByCodeAndLaboratoryUserCode(product.getCode(), userCode);
+    public Optional<Product> updateProduct(Product product) {
+    	Optional<Product> updatedProduct = Optional.empty();
+    	ProductEntity productEntity = checkUserAndGetProductEntity(product.getCode());
     	if (productEntity != null) {
 	        productJpaRepository.save(productEntity);
-	        return getProduct(productEntity.getCode());
+	        updatedProduct = getProduct(productEntity.getCode());
     	}
-    	return null;
+    	return updatedProduct;
     }
     
     @Override
     public boolean deleteProduct(String code) {
-    	String userCode = getUserCodeFromAuthentication();
-    	ProductEntity productEntity = this.productJpaRepository.findByCodeAndLaboratoryUserCode(code, userCode);
+    	ProductEntity productEntity = checkUserAndGetProductEntity(code);
     	if (productEntity != null) {
     		productJpaRepository.delete(productEntity);
     		return true;
@@ -99,4 +96,15 @@ public class ProductServiceImpl implements ProductService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (String) authentication.getPrincipal();
     }
+    
+    private boolean checkUserIfAccessLaboratoryIfGranted(String laboratoryCode) {
+    	String userCode = getUserCodeFromAuthentication();
+    	return (productJpaRepository.findByCodeAndLaboratoryUserCode(laboratoryCode, userCode) != null);
+    }
+
+    private ProductEntity checkUserAndGetProductEntity(String code) {
+    	String userCode = getUserCodeFromAuthentication();
+    	return productJpaRepository.findByCodeAndLaboratoryUserCode(code, userCode);
+    }
+
 }
