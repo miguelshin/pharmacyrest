@@ -19,9 +19,15 @@ public class QLaboratoryEntity extends EntityPathBase<LaboratoryEntity> {
 
     public static final QLaboratoryEntity laboratoryEntity = new QLaboratoryEntity("laboratoryEntity");
 
+    public final StringPath address = createString("address");
+
     public final StringPath code = createString("code");
 
+    public final StringPath email = createString("email");
+
     public final StringPath name = createString("name");
+
+    public final StringPath phone = createString("phone");
 
     public final StringPath userCode = createString("userCode");
 

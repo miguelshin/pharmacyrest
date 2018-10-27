@@ -14,6 +14,7 @@ public class CashOrderConverter {
         CashOrder cashOrder = new CashOrder();
         cashOrder.setCode(cashOrderEntity.getCode());
         cashOrder.setDate(cashOrderEntity.getDate());
+        cashOrder.setObservations(cashOrderEntity.getObservations());
         cashOrder.setPharmacy(PharmacyConverter.pharmacyEntityToModel(cashOrderEntity.getPharmacy()));
         cashOrder.setCashOrderProducts(new ArrayList<CashOrderProduct>());
         for (CashOrderProductEntity cashOrderProductEntity : cashOrderProductsEntity) {
@@ -27,6 +28,7 @@ public class CashOrderConverter {
         CashOrderEntity cashOrderEntity = new CashOrderEntity();
         cashOrderEntity.setCode(cashOrder.getCode());
         cashOrderEntity.setDate(cashOrder.getDate());
+        cashOrderEntity.setObservations(cashOrder.getObservations());
         cashOrderEntity.setPharmacy(PharmacyConverter.pharmacyModelToEntity(cashOrder.getPharmacy()));
         return cashOrderEntity;
     }

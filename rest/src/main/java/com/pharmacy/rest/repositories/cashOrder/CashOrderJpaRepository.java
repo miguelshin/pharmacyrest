@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.pharmacy.rest.entities.CashOrderEntity;
 import com.pharmacy.rest.entities.PharmacyEntity;;
 
-@Repository("orderJpaRepository")
+@Repository("cashOrderJpaRepository")
 public interface CashOrderJpaRepository extends JpaRepository<CashOrderEntity, Serializable>{
     public abstract List<CashOrderEntity> findByDateAndPharmacyUserCode(Date date, String userCode);
     public abstract CashOrderEntity findByCodeAndPharmacyUserCode(String code, String userCode);

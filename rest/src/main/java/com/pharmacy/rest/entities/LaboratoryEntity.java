@@ -22,6 +22,12 @@ public class LaboratoryEntity {
     private String code;
     @Column(name="name", length=75)
     private String name;
+    @Column(name="address", length=75)
+    private String address;
+    @Column(name="email", length=250)
+    private String email;
+    @Column(name="phone", length=20)
+    private String phone;
     @Column(name="user_code", length=36)
     private String userCode;
 

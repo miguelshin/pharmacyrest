@@ -28,4 +28,5 @@ public class CashOrder {
 	private List<CashOrderProduct> cashOrderProducts;
 	@NotNull
 	private Pharmacy pharmacy;
+	private String observations;
 }

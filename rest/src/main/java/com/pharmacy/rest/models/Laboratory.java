@@ -19,4 +19,7 @@ public class Laboratory extends Model {
 	private String code;
 	@NotNull
 	private String name;
+	private String address;
+	private String email;
+	private String phone;
 }

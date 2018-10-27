@@ -72,7 +72,8 @@ public class PharmacyRestController {
     public ResponseEntity<Object> updatePharmacy(@RequestBody Pharmacy pharmacy) {
     	try {
     		Optional<Pharmacy> updatedPharmacy = pharmacyService.updatePharmacy(pharmacy);
-	        if (updatedPharmacy.isPresent()) {
+    		logger.info("Pharmacy updated: " + updatedPharmacy.get().getCode());
+    		if (updatedPharmacy.isPresent()) {
 	    		return ResponseEntity
 	    				.status(HttpStatus.ACCEPTED)
 	    				.body(updatedPharmacy.get());        	

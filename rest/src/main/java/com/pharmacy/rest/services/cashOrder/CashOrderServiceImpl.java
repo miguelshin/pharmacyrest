@@ -34,8 +34,8 @@ public class CashOrderServiceImpl implements CashOrderService {
     private CashOrderProductJpaRepository cashOrderProductJpaRepository;
 
     @Autowired
-    @Qualifier("cashOrderQueryDSLRepository")
-    private LaboratoryQueryDSLRepository cashOrderQueryDSLRepository;
+    @Qualifier("laboratoryQueryDSLRepository")
+    private LaboratoryQueryDSLRepository laboratoryQueryDSLRepository;
 
     @Autowired
     @Qualifier("pharmacyJpaRepository")

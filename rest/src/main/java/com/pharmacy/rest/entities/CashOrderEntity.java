@@ -25,6 +25,8 @@ public class CashOrderEntity {
     private String code;
     @Column(name="date")
     private Date date;
+    @Column(name="observations", length=300)
+    private String observations;
     @ManyToOne
     private PharmacyEntity pharmacy;
 

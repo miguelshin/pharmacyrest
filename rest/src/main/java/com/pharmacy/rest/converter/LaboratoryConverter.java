@@ -9,6 +9,9 @@ public class LaboratoryConverter {
         Laboratory laboratory = new Laboratory();
         laboratory.setCode(laboratoryEntity.getCode());
         laboratory.setName(laboratoryEntity.getName());        
+        laboratory.setAddress(laboratoryEntity.getAddress());
+        laboratory.setEmail(laboratoryEntity.getEmail());
+        laboratory.setPhone(laboratoryEntity.getPhone());        
         return laboratory;
     }
 
@@ -16,6 +19,9 @@ public class LaboratoryConverter {
         LaboratoryEntity laboratoryEntity = new LaboratoryEntity();
         laboratoryEntity.setCode(laboratory.getCode());
         laboratoryEntity.setName(laboratory.getName());        
+        laboratoryEntity.setAddress(laboratory.getAddress());        
+        laboratoryEntity.setEmail(laboratory.getEmail());
+        laboratoryEntity.setPhone(laboratory.getPhone());
         return laboratoryEntity;
     }
 
