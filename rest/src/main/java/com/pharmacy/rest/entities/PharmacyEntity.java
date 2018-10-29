@@ -26,6 +26,8 @@ public class PharmacyEntity {
     private String address;
     @Column(name="cif", length=9)
     private String cif;
+    @Column(name="phone", length=9)
+    private String phone;
     @Column(name="user_code", length=36)
     private String userCode;
 
