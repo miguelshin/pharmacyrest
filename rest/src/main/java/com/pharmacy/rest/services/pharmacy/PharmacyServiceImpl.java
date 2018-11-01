@@ -64,7 +64,9 @@ public class PharmacyServiceImpl implements PharmacyService {
     	Optional<Pharmacy> updatedPharmacy = Optional.empty();
     	PharmacyEntity pharmacyEntity = checkUserAndGetPharmacyEntity(pharmacy.getCode());
     	if (pharmacyEntity != null) {
-	        pharmacyJpaRepository.save(pharmacyEntity);
+        	String userCode = getUserCodeFromAuthentication();
+        	pharmacy.setUserCode(userCode);
+    		pharmacyJpaRepository.save(PharmacyConverter.pharmacyModelToEntity(pharmacy));
 	        updatedPharmacy = getPharmacy(pharmacyEntity.getCode());
     	}
     	return updatedPharmacy;
@@ -83,5 +85,5 @@ public class PharmacyServiceImpl implements PharmacyService {
     private String getUserCodeFromAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (String) authentication.getPrincipal();
-    }
+    }	
 }
