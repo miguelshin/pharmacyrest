@@ -7,10 +7,9 @@ import com.pharmacy.rest.entities.PharmacyEntity;
 import com.pharmacy.rest.models.Pharmacy;
 
 public interface PharmacyService {
-    public abstract List<Pharmacy> searchPharmacies(String textName);
-    public PharmacyEntity checkUserAndGetPharmacyEntity(String code);
-    public Optional<Pharmacy> getPharmacy(String code);
-    public abstract Pharmacy savePharmacy(Pharmacy pharmacy);
-    public abstract boolean deletePharmacy(String code);
-    public abstract Optional<Pharmacy> updatePharmacy(Pharmacy pharmacy);
+    List<Pharmacy> searchPharmacies(String textName);
+    Optional<Pharmacy> getPharmacy(String code);
+    Pharmacy savePharmacy(Pharmacy pharmacy);
+    boolean deletePharmacy(String code);
+    Optional<Pharmacy> updatePharmacy(Pharmacy pharmacy);
 }

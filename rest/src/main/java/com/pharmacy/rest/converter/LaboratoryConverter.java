@@ -22,6 +22,8 @@ public class LaboratoryConverter {
         laboratoryEntity.setAddress(laboratory.getAddress());        
         laboratoryEntity.setEmail(laboratory.getEmail());
         laboratoryEntity.setPhone(laboratory.getPhone());
+        laboratoryEntity.setUserCode(laboratory.getUserCode());
+
         return laboratoryEntity;
     }
 

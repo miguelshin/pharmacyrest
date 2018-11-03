@@ -22,4 +22,5 @@ public class Laboratory extends Model {
 	private String address;
 	private String email;
 	private String phone;
+	private String userCode;
 }

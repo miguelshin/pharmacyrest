@@ -47,8 +47,8 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     @Override
     public Laboratory saveLaboratory(Laboratory laboratory) {
     	String userCode = getUserCodeFromAuthentication();
+        laboratory.setUserCode(userCode);
         LaboratoryEntity laboratoryEntity = LaboratoryConverter.laboratoryModelToEntity(laboratory);
-        laboratoryEntity.setUserCode(userCode);
         laboratoryJpaRepository.save(laboratoryEntity);
         return getLaboratory(laboratoryEntity.getCode()).get();
     }
@@ -58,6 +58,8 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     	Optional<Laboratory> updatedLaboratory = Optional.empty();
     	LaboratoryEntity laboratoryEntity = checkUserAndGetLaboratoryEntity(laboratory.getCode());
     	if (laboratoryEntity != null) {
+            String userCode = getUserCodeFromAuthentication();
+            laboratory.setUserCode(userCode);
 	        laboratoryJpaRepository.save(laboratoryEntity);
 	        updatedLaboratory = getLaboratory(laboratoryEntity.getCode());
     	}

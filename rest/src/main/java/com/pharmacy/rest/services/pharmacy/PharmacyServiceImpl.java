@@ -38,12 +38,6 @@ public class PharmacyServiceImpl implements PharmacyService {
     }
 
     @Override
-    public PharmacyEntity checkUserAndGetPharmacyEntity(String code) {
-    	String userCode = getUserCodeFromAuthentication();
-    	return pharmacyJpaRepository.findByCodeAndUserCode(code, userCode);
-    }
-    
-    @Override
     public Optional<Pharmacy> getPharmacy(String code) {
     	PharmacyEntity pharmacyEntity = checkUserAndGetPharmacyEntity(code);
         Pharmacy pharmacy = PharmacyConverter.pharmacyEntityToModel(pharmacyEntity);
@@ -74,16 +68,23 @@ public class PharmacyServiceImpl implements PharmacyService {
     
     @Override
     public boolean deletePharmacy(String code) {
+        boolean deletedPharmacy = false;
     	PharmacyEntity pharmacyEntity = checkUserAndGetPharmacyEntity(code);
     	if (pharmacyEntity != null) {
     		pharmacyJpaRepository.delete(pharmacyEntity);
-    		return true;
+    		deletedPharmacy = true;
     	}
-    	return false;
+    	return deletedPharmacy;
     }
     
     private String getUserCodeFromAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (String) authentication.getPrincipal();
-    }	
+    }
+
+    public PharmacyEntity checkUserAndGetPharmacyEntity(String code) {
+        String userCode = getUserCodeFromAuthentication();
+        return pharmacyJpaRepository.findByCodeAndUserCode(code, userCode);
+    }
+
 }
