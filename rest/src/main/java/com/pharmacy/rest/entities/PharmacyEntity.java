@@ -18,17 +18,19 @@ import lombok.Setter;
 @Table(name="pharmacy")
 public class PharmacyEntity {
     @Id
-    @Column(name="code", length=36)
+    @Column(nullable = false, name = "code", length = 36)
     private String code;
-    @Column(name="name", length=75)
+    @Column(nullable = false, name = "name", length = 75)
     private String name;
-    @Column(name="address", length=150)
+    @Column(name = "address", length = 150)
     private String address;
-    @Column(name="cif", length=9)
+    @Column(name = "cif", length = 9)
     private String cif;
-    @Column(name="phone", length=9)
+    @Column(name = "email", length = 200)
+    private String email;
+    @Column(name = "phone", length = 9)
     private String phone;
-    @Column(name="user_code", length=36)
+    @Column(nullable = false, name = "user_code", length = 36)
     private String userCode;
 
 }

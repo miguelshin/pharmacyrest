@@ -53,3 +53,13 @@
 2018-11-01 20:46:57 INFO  PharmacyRestController:56 - Error updating pharmacy: null
 2018-11-01 20:49:00 INFO  PharmacyRestController:76 - Pharmacy updated: 81dd8ea7-0a67-48ee-80da-b1bf835018d9
 2018-11-01 21:39:45 INFO  PharmacyRestController:76 - Pharmacy updated: 9a44a666-307d-4481-a7b1-7c943cd69d0c
+2018-11-04 10:38:28 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 10:38:45 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 10:39:22 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 10:40:35 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 10:41:23 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 11:24:52 INFO  PharmacyRestController:76 - Pharmacy updated: a4831c5f-8105-4e2b-8455-d56c82dbfe3b
+2018-11-04 11:26:09 INFO  PharmacyRestController:76 - Pharmacy updated: a4831c5f-8105-4e2b-8455-d56c82dbfe3b
+2018-11-04 11:29:49 INFO  PharmacyRestController:76 - Pharmacy updated: a4831c5f-8105-4e2b-8455-d56c82dbfe3b
+2018-11-04 11:31:57 INFO  PharmacyRestController:76 - Pharmacy updated: a4831c5f-8105-4e2b-8455-d56c82dbfe3b
+2018-11-04 11:51:50 INFO  PharmacyRestController:76 - Pharmacy updated: a4831c5f-8105-4e2b-8455-d56c82dbfe3b

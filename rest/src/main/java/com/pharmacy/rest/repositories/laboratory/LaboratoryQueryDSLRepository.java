@@ -22,14 +22,11 @@ public class LaboratoryQueryDSLRepository {
     public List<LaboratoryEntity> searchLaboratories(String textName, String userCode) {
         List<LaboratoryEntity> laboratories = null;
         JPAQuery<LaboratoryEntity> query = new JPAQuery<LaboratoryEntity>(em);
-        BooleanBuilder predicateBuilder = null;
+        BooleanBuilder predicateBuilder = new BooleanBuilder(qc.userCode.equalsIgnoreCase(userCode));
         if (textName != null && !textName.isEmpty()) {
-            predicateBuilder = new BooleanBuilder(qc.name.containsIgnoreCase(textName)).and(qc.userCode.equalsIgnoreCase(userCode));
-            laboratories = query.select(qc).from(qc).where(predicateBuilder).fetch();
-        } else {
-            laboratories = query.select(qc).from(qc).fetch();
+            predicateBuilder = predicateBuilder.and(qc.name.containsIgnoreCase(textName));
         }
-
+        laboratories = query.select(qc).from(qc).where(predicateBuilder).fetch();
         return laboratories;
     }
 }

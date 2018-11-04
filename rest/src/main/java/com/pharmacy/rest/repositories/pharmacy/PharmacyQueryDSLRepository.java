@@ -22,14 +22,12 @@ public class PharmacyQueryDSLRepository {
     public List<PharmacyEntity> searchPharmacies(String textName, String userCode) {
         List<PharmacyEntity> pharmacies = null;
         JPAQuery<PharmacyEntity> query = new JPAQuery<PharmacyEntity>(em);
-        BooleanBuilder predicateBuilder = null;
+        BooleanBuilder predicateBuilder = new BooleanBuilder(qc.userCode.equalsIgnoreCase(userCode));
         if (textName != null && !textName.isEmpty()) {
-            predicateBuilder = new BooleanBuilder(qc.name.containsIgnoreCase(textName)).and(qc.userCode.equalsIgnoreCase(userCode));
-            pharmacies = query.select(qc).from(qc).where(predicateBuilder).fetch();
-        } else {
-            pharmacies = query.select(qc).from(qc).fetch();
+             predicateBuilder = predicateBuilder.and(qc.name.containsIgnoreCase(textName));
         }
-
+        pharmacies = query.select(qc).from(qc).where(predicateBuilder).fetch();
+        
         return pharmacies;
     }
 }

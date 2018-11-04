@@ -25,6 +25,8 @@ public class QPharmacyEntity extends EntityPathBase<PharmacyEntity> {
 
     public final StringPath code = createString("code");
 
+    public final StringPath email = createString("email");
+
     public final StringPath name = createString("name");
 
     public final StringPath phone = createString("phone");

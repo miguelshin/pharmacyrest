@@ -60,7 +60,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     	if (laboratoryEntity != null) {
             String userCode = getUserCodeFromAuthentication();
             laboratory.setUserCode(userCode);
-	        laboratoryJpaRepository.save(laboratoryEntity);
+	        laboratoryJpaRepository.save(LaboratoryConverter.laboratoryModelToEntity(laboratory));
 	        updatedLaboratory = getLaboratory(laboratoryEntity.getCode());
     	}
     	return updatedLaboratory;

@@ -18,17 +18,17 @@ import lombok.Setter;
 @Table(name="laboratory")
 public class LaboratoryEntity {
     @Id
-    @Column(name="code", length=36)
+    @Column(nullable = false, name = "code", length = 36)
     private String code;
-    @Column(name="name", length=75)
+    @Column(nullable = false, name = "name", length = 75)
     private String name;
-    @Column(name="address", length=75)
+    @Column(name="address", length = 150)
     private String address;
-    @Column(name="email", length=250)
+    @Column(name="email", length = 200)
     private String email;
-    @Column(name="phone", length=20)
+    @Column(name="phone", length = 9)
     private String phone;
-    @Column(name="user_code", length=36)
+    @Column(nullable = false, name = "user_code", length = 36)
     private String userCode;
 
 }

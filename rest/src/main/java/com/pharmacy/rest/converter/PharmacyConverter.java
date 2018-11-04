@@ -11,6 +11,7 @@ public class PharmacyConverter {
         pharmacy.setName(pharmacyEntity.getName());
         pharmacy.setAddress(pharmacyEntity.getAddress());
         pharmacy.setCif(pharmacyEntity.getCif());
+        pharmacy.setEmail(pharmacyEntity.getEmail());
         pharmacy.setPhone(pharmacyEntity.getPhone());
         //pharmacy.setUserCode(pharmacyEntity.getUserCode());
         
@@ -23,6 +24,7 @@ public class PharmacyConverter {
         pharmacyEntity.setName(pharmacy.getName());
         pharmacyEntity.setAddress(pharmacy.getAddress());
         pharmacyEntity.setCif(pharmacy.getCif());
+        pharmacyEntity.setEmail(pharmacy.getEmail());
         pharmacyEntity.setPhone(pharmacy.getPhone());
         pharmacyEntity.setUserCode(pharmacy.getUserCode());
         

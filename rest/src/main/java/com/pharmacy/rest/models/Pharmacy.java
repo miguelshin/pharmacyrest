@@ -21,6 +21,7 @@ public class Pharmacy {
 	private String name;
 	private String address;
 	private String cif;
+	private String email;
 	private String phone;
 	private String userCode;
 }
