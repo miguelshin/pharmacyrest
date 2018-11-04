@@ -76,7 +76,7 @@ public class ProductServiceImpl implements ProductService {
     	Optional<Product> updatedProduct = Optional.empty();
     	ProductEntity productEntity = checkUserAndGetProductEntity(product.getCode());
     	if (productEntity != null) {
-	        productJpaRepository.save(productEntity);
+	        productJpaRepository.save(ProductConverter.productModelToEntity(product));
 	        updatedProduct = getProduct(productEntity.getCode());
     	}
     	return updatedProduct;
@@ -99,7 +99,7 @@ public class ProductServiceImpl implements ProductService {
     
     private boolean checkUserIfAccessLaboratoryIsGranted(String laboratoryCode) {
     	String userCode = getUserCodeFromAuthentication();
-    	return (productJpaRepository.findByCodeAndLaboratoryUserCode(laboratoryCode, userCode) != null);
+    	return (laboratoryJpaRepository.findByCodeAndUserCode(laboratoryCode, userCode) != null);
     }
 
     private ProductEntity checkUserAndGetProductEntity(String code) {

@@ -63,3 +63,19 @@
 2018-11-04 11:29:49 INFO  PharmacyRestController:76 - Pharmacy updated: a4831c5f-8105-4e2b-8455-d56c82dbfe3b
 2018-11-04 11:31:57 INFO  PharmacyRestController:76 - Pharmacy updated: a4831c5f-8105-4e2b-8455-d56c82dbfe3b
 2018-11-04 11:51:50 INFO  PharmacyRestController:76 - Pharmacy updated: a4831c5f-8105-4e2b-8455-d56c82dbfe3b
+2018-11-04 18:58:47 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 18:59:09 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:01:03 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:01:50 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:01:58 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:03:44 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:04:25 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:06:30 INFO  PharmacyRestController:76 - Pharmacy updated: ff069226-28e0-4d3b-8caf-fcbabc912b48
+2018-11-04 19:06:46 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:06:55 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:07:39 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:07:49 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:08:26 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:10:03 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:10:15 INFO  LaboratoryRestController:56 - Error updating laboratory: null
+2018-11-04 19:10:17 INFO  LaboratoryRestController:56 - Error updating laboratory: null

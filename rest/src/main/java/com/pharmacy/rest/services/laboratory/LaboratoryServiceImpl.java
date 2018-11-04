@@ -29,6 +29,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     @Override
     public List<Laboratory> searchLaboratories(String textName) {
     	String userCode = getUserCodeFromAuthentication();
+    	System.out.println("XDDDDDDDDDD");
         List<LaboratoryEntity> laboratoryEntities = laboratoryQueryDSLRepository.searchLaboratories(textName, userCode);
         List<Laboratory> laboratories = new ArrayList<Laboratory>();
         for (LaboratoryEntity laboratoryEntity : laboratoryEntities) {
