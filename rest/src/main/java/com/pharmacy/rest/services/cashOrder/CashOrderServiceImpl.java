@@ -1,9 +1,6 @@
 package com.pharmacy.rest.services.cashOrder;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,7 +42,28 @@ public class CashOrderServiceImpl implements CashOrderService {
     @Qualifier("productJpaRepository")
     private ProductJpaRepository productJpaRepository;
 
-    @Override
+	@Override
+	public List<CashOrder> searchCashOrdersByMonth(int month, int year) {
+		List<CashOrder> cashOrders = new ArrayList<CashOrder>();
+		Calendar firstDayOfTheMonth = Calendar.getInstance();
+		firstDayOfTheMonth.set(Calendar.YEAR, year);
+		firstDayOfTheMonth.set(Calendar.MONTH, month);
+		firstDayOfTheMonth.set(Calendar.DAY_OF_MONTH, 1);
+
+		Calendar lastDayOfTheMonth = Calendar.getInstance();
+		lastDayOfTheMonth.set(Calendar.YEAR, year);
+		lastDayOfTheMonth.set(Calendar.MONTH, month);
+		lastDayOfTheMonth.set(Calendar.DAY_OF_MONTH, Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH));
+
+		List<CashOrderEntity> cashOrderEntities = checkUserAndGetCashOrderEntitiesByPeriod(firstDayOfTheMonth.getTime(), lastDayOfTheMonth.getTime());
+		for (CashOrderEntity cashOrderEntity : cashOrderEntities) {
+			List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
+			cashOrders.add(CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities));
+		}
+		return cashOrders;
+	}
+
+	@Override
     public List<CashOrder> searchCashOrders(Date date) {
         List<CashOrder> cashOrders = new ArrayList<CashOrder>();
     	List<CashOrderEntity> cashOrderEntities = checkUserAndGetCashOrderEntities(date);
@@ -131,6 +149,11 @@ public class CashOrderServiceImpl implements CashOrderService {
     	String userCode = getUserCodeFromAuthentication();
     	return cashOrderJpaRepository.findByCodeAndPharmacyUserCode(code, userCode);
     }
+
+    private List<CashOrderEntity> checkUserAndGetCashOrderEntitiesByPeriod(Date startDate, Date endDate) {
+		String userCode = getUserCodeFromAuthentication();
+		return cashOrderJpaRepository.findByDateBetweenAndPharmacyUserCode(startDate, endDate, userCode);
+	}
 
     private String getUserCodeFromAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

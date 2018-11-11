@@ -7,13 +7,13 @@ import com.pharmacy.rest.models.Product;
 
 public class ProductConverter {
 
-    public static Product productEntityToModel(ProductEntity pharmacyEntity) {
+    public static Product productEntityToModel(ProductEntity productEntity) {
         Product product = new Product();
-        product.setCode(pharmacyEntity.getCode());
-        product.setName(pharmacyEntity.getName());
+        product.setCode(productEntity.getCode());
+        product.setName(productEntity.getName());
         Laboratory laboratory = new Laboratory();
-        laboratory.setCode(pharmacyEntity.getCode());
-        laboratory.setName(pharmacyEntity.getName());
+        laboratory.setCode(productEntity.getLaboratory().getCode());
+        laboratory.setName(productEntity.getLaboratory().getName());
         product.setLaboratory(laboratory);
         return product;
     }

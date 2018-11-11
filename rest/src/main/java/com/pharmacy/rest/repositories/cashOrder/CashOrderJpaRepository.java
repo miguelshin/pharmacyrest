@@ -13,6 +13,7 @@ import com.pharmacy.rest.entities.PharmacyEntity;;
 @Repository("cashOrderJpaRepository")
 public interface CashOrderJpaRepository extends JpaRepository<CashOrderEntity, Serializable>{
     public abstract List<CashOrderEntity> findByDateAndPharmacyUserCode(Date date, String userCode);
+    public abstract List<CashOrderEntity> findByDateBetweenAndPharmacyUserCode(Date startDate, Date endDate, String userCode);
     public abstract CashOrderEntity findByCodeAndPharmacyUserCode(String code, String userCode);
     public abstract CashOrderEntity findByCode(String code);
     public abstract List<CashOrderEntity> findByPharmacyCodeAndDate(String pharmacyCode, Date date);

@@ -26,8 +26,9 @@ import com.pharmacy.rest.services.cashOrder.CashOrderService;
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE }) 
 @RestController
 public class CashOrderRestController {
+	protected static final String PERIOD_ROOT_PATH = "/{month}/{year}";
     protected static final String CODE_ROOT_PATH = "/{code}";
-    
+
     final static Logger logger = Logger.getLogger(CashOrderRestController.class);
     
     @Autowired
@@ -40,7 +41,14 @@ public class CashOrderRestController {
         return new ResponseEntity<List<CashOrder>>(cashOrders, HttpStatus.OK);
     }
 
-    @RequestMapping(value = CODE_ROOT_PATH, method = RequestMethod.GET)
+	@RequestMapping(value = PERIOD_ROOT_PATH, method = RequestMethod.GET)
+	public ResponseEntity<List<CashOrder>> searchCashOrders(@PathVariable(value="month", required=false) int month,
+															@PathVariable(value="year", required=false) int year) {
+		List<CashOrder> cashOrders = cashOrderService.searchCashOrdersByMonth(month, year);
+		return new ResponseEntity<List<CashOrder>>(cashOrders, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = CODE_ROOT_PATH, method = RequestMethod.GET)
     public ResponseEntity<Object> getCashOrder(@PathVariable(value="code") String code) {
     	try {
 	    	Optional<CashOrder> cashOrder = cashOrderService.getCashOrder(code);
