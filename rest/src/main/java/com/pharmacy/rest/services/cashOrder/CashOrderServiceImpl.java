@@ -87,11 +87,13 @@ public class CashOrderServiceImpl implements CashOrderService {
     	if (checkUserIfAccessPharmacyIsGranted(cashOrder.getPharmacy().getCode())) {
     		CashOrderEntity cashOrderEntity = CashOrderConverter.cashOrderModelToEntity(cashOrder);
     		cashOrderJpaRepository.save(cashOrderEntity);
-    		for (CashOrderProduct cashOrderProduct : cashOrder.getCashOrderProducts()) {
-    			if (checkUserIfAccessLaboratoryIsGranted(cashOrderProduct.getProduct().getCode())) {
-    				cashOrderProductJpaRepository.save(CashOrderProductConverter.cashOrderProductModelToEntity(cashOrderProduct, cashOrder));
-    			}
-    		}
+			if (cashOrder.getCashOrderProducts() != null) {
+				for (CashOrderProduct cashOrderProduct : cashOrder.getCashOrderProducts()) {
+					if (checkUserIfAccessLaboratoryIsGranted(cashOrderProduct.getProduct().getCode())) {
+						cashOrderProductJpaRepository.save(CashOrderProductConverter.cashOrderProductModelToEntity(cashOrderProduct, cashOrder));
+					}
+				}
+			}
     		return getCashOrder(cashOrder.getCode()).get();
     	}
     	return null;

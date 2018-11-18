@@ -21,8 +21,6 @@ public class CashOrder {
 	@NotNull
 	private String code;
 	@NotNull
-	private Pharmacy name;
-	@NotNull
 	private Date date;
 	@NotNull
 	private List<CashOrderProduct> cashOrderProducts;
