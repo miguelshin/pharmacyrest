@@ -61,12 +61,17 @@ public class PharmacyRestController {
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public Pharmacy savePharmacy(@RequestBody Pharmacy pharmacy) {
+    public ResponseEntity<Pharmacy> savePharmacy(@RequestBody Pharmacy pharmacy) {
         pharmacy.setCode(UUID.randomUUID().toString());
         Pharmacy savedPharmacy = pharmacyService.savePharmacy(pharmacy);
-        return savedPharmacy;
-    }
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Max-Age", "3600")
+				.header("Access-Control-Allow-Methods", "*")
+				.header("Access-Control-Allow-Headers", "X-Requested-With,Host,User-Agent,Accept,Accept-Language,Accept-Encoding,Accept-Charset,Keep-Alive,Connection,Referer,Origin")
+				.body(savedPharmacy);
+	}
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Object> updatePharmacy(@RequestBody Pharmacy pharmacy) {
