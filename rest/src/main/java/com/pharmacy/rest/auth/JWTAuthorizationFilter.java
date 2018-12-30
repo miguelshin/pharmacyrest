@@ -33,7 +33,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 			return;
 		}
 
-		res.setHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
 		res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
 		res.setHeader("Access-Control-Max-Age", "3600");
 		res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept, x-requested-with, Cache-Control");
