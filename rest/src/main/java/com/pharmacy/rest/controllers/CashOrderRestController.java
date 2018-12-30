@@ -23,7 +23,7 @@ import com.pharmacy.rest.models.*;
 import com.pharmacy.rest.services.cashOrder.CashOrderService;
 
 @RequestMapping("/cashOrder")
-@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE }) 
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 @RestController
 public class CashOrderRestController {
 	protected static final String PERIOD_ROOT_PATH = "/{month}/{year}";
