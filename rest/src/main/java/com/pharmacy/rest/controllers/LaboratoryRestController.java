@@ -22,7 +22,7 @@ import com.pharmacy.rest.models.Laboratory;
 import com.pharmacy.rest.services.laboratory.LaboratoryService;
 
 @RequestMapping("/laboratory")
-@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE }) 
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 @RestController
 public class LaboratoryRestController {
     protected static final String CODE_ROOT_PATH = "/{code}";

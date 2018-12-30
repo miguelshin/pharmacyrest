@@ -22,7 +22,7 @@ import com.pharmacy.rest.models.*;
 import com.pharmacy.rest.services.product.ProductService;
 
 @RequestMapping("/product")
-@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE }) 
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 @RestController
 public class ProductRestController {
     protected static final String CODE_ROOT_PATH = "/{code}";
