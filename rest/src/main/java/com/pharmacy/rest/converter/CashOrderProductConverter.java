@@ -12,6 +12,7 @@ public class CashOrderProductConverter {
         cashOrderProduct.setAmount(cashOrderProductEntity.getAmount());
         cashOrderProduct.setProduct(ProductConverter.productEntityToModel(cashOrderProductEntity.getId().getProduct()));
         cashOrderProduct.setQuantity(cashOrderProductEntity.getQuantity());
+        cashOrderProduct.setImageUrl(cashOrderProductEntity.getImageUrl());
         return cashOrderProduct;
     }
 
@@ -21,6 +22,7 @@ public class CashOrderProductConverter {
         cashOrderProductEntity.setId(new CashOrderProductPKEntity());        
         cashOrderProductEntity.getId().setProduct(ProductConverter.productModelToEntity(cashOrderProduct.getProduct()));
         cashOrderProductEntity.getId().setCashOrder(CashOrderConverter.cashOrderModelToEntity(cashOrder));
+        cashOrderProductEntity.setImageUrl(cashOrderProduct.getImageUrl());
         return cashOrderProductEntity;
     }
 

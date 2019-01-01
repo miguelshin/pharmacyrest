@@ -23,4 +23,6 @@ public class CashOrderProductEntity {
     private int quantity;
     @Column(name="amount")
     private double amount;
+    @Column(name = "imageUrl", length = 200)
+    private String imageUrl;
 }
