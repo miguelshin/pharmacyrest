@@ -86,7 +86,7 @@ public class CashOrderServiceImpl implements CashOrderService {
     public Optional<CashOrder> getCashOrder(String code) {
 		CashOrderEntity cashOrderEntity = checkUserAndGetCashOrderEntity(code);
     	List<CashOrderProductEntity> cashOrderProductsEntity = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
-		List<CashOrderImageEntity> cashOrderImagesEntity = cashOrderImageJpaRepository.findByCashOrderCode(cashOrderEntity.getCode());
+		List<CashOrderImageEntity> cashOrderImagesEntity = cashOrderImageJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
     	CashOrder cashOrder = CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductsEntity, cashOrderImagesEntity);
         return Optional.of(cashOrder);
     }
@@ -109,7 +109,7 @@ public class CashOrderServiceImpl implements CashOrderService {
 			}
     		return getCashOrder(cashOrder.getCode()).get();
     	}
-    	
+
     	return null;
     }
     
@@ -142,7 +142,7 @@ public class CashOrderServiceImpl implements CashOrderService {
 		CashOrderEntity cashOrderEntity = cashOrderJpaRepository.findByCodeAndPharmacyUserCode(code, userCode);
     	if (cashOrderEntity != null) {
 			cashOrderProductJpaRepository.deleteByIdCashOrderCode(code);
-    		cashOrderImageJpaRepository.deleteByCashOrderCode(code);
+    		cashOrderImageJpaRepository.deleteByIdCashOrderCode(code);
     		cashOrderJpaRepository.delete(cashOrderEntity);
     		return true;
     	}

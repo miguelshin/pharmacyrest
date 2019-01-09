@@ -22,11 +22,7 @@ public class QCashOrderImageEntity extends EntityPathBase<CashOrderImageEntity> 
 
     public static final QCashOrderImageEntity cashOrderImageEntity = new QCashOrderImageEntity("cashOrderImageEntity");
 
-    public final QCashOrderEntity cashOrder;
-
-    public final StringPath code = createString("code");
-
-    public final StringPath url = createString("url");
+    public final QCashOrderImagePKEntity id;
 
     public QCashOrderImageEntity(String variable) {
         this(CashOrderImageEntity.class, forVariable(variable), INITS);
@@ -46,7 +42,7 @@ public class QCashOrderImageEntity extends EntityPathBase<CashOrderImageEntity> 
 
     public QCashOrderImageEntity(Class<? extends CashOrderImageEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.cashOrder = inits.isInitialized("cashOrder") ? new QCashOrderEntity(forProperty("cashOrder"), inits.get("cashOrder")) : null;
+        this.id = inits.isInitialized("id") ? new QCashOrderImagePKEntity(forProperty("id"), inits.get("id")) : null;
     }
 
 }

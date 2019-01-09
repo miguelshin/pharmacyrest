@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository("cashOrderImageJpaRepository")
 public interface CashOrderImageJpaRepository extends JpaRepository<CashOrderImageEntity, Serializable>{
-    List<CashOrderImageEntity> findByCashOrderCode(String cashOrderCode);
-    void deleteByCashOrderCode(String cashOrderCode);
+    List<CashOrderImageEntity> findByIdCashOrderCode(String cashOrderCode);
+    void deleteByIdCashOrderCode(String cashOrderCode);
 }

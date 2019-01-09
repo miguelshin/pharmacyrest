@@ -22,9 +22,11 @@
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/services/laboratory/LaboratoryServiceImpl.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/models/Model.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/controllers/main/MainController.java
+/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/target/generated-sources/java/com/pharmacy/rest/entities/QCashOrderImagePKEntity.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/target/generated-sources/java/com/pharmacy/rest/entities/QLaboratoryEntity.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/entities/ProductEntity.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/services/product/ProductService.java
+/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/entities/CashOrderImagePKEntity.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/repositories/CashOrderImage/CashOrderImageJpaRepository.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/models/CashOrderProduct.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/rest/src/main/java/com/pharmacy/rest/repositories/product/ProductJpaRepository.java
