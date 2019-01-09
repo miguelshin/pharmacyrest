@@ -14,11 +14,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="cashorder_image")
 public class CashOrderImageEntity {
-    @Id
-    @Column(name="code", length=36)
-    private String code;
-    @Column(name="url", length=250)
-    private String url;
-    @ManyToOne
-    private CashOrderEntity cashOrder;
+    @EmbeddedId
+    private CashOrderImagePKEntity id;
 }

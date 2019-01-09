@@ -86,7 +86,7 @@ public class CashOrderServiceImpl implements CashOrderService {
     public Optional<CashOrder> getCashOrder(String code) {
 		CashOrderEntity cashOrderEntity = checkUserAndGetCashOrderEntity(code);
     	List<CashOrderProductEntity> cashOrderProductsEntity = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
-		List<CashOrderImageEntity> cashOrderImagesEntity = null;//cashOrderImageJpaRepository.findByCashOrderCode(cashOrderEntity.getCode());
+		List<CashOrderImageEntity> cashOrderImagesEntity = cashOrderImageJpaRepository.findByCashOrderCode(cashOrderEntity.getCode());
     	CashOrder cashOrder = CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductsEntity, cashOrderImagesEntity);
         return Optional.of(cashOrder);
     }
@@ -104,7 +104,7 @@ public class CashOrderServiceImpl implements CashOrderService {
 				}
 
 				for (CashOrderImage cashOrderImage : cashOrder.getCashOrderImages()) {
-					cashOrderImageJpaRepository.save(CashOrderImageConverter.cashOrderImageModelToEntity(cashOrderImage));
+					cashOrderImageJpaRepository.save(CashOrderImageConverter.cashOrderImageModelToEntity(cashOrderImage, cashOrder));
 				}
 			}
     		return getCashOrder(cashOrder.getCode()).get();
@@ -127,7 +127,7 @@ public class CashOrderServiceImpl implements CashOrderService {
     		}
 
 			for (CashOrderImage cashOrderImage : cashOrder.getCashOrderImages()) {
-				cashOrderImageJpaRepository.save(CashOrderImageConverter.cashOrderImageModelToEntity(cashOrderImage));
+				cashOrderImageJpaRepository.save(CashOrderImageConverter.cashOrderImageModelToEntity(cashOrderImage, cashOrder));
 			}
 
     		updatedCashOrder = getCashOrder(cashOrder.getCode());
