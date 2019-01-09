@@ -19,15 +19,19 @@ public class CashOrderConverter {
         cashOrder.setObservations(cashOrderEntity.getObservations());
         cashOrder.setPharmacy(PharmacyConverter.pharmacyEntityToModel(cashOrderEntity.getPharmacy()));
         cashOrder.setCashOrderProducts(new ArrayList<>());
-        for (CashOrderProductEntity cashOrderProductEntity : cashOrderProductsEntity) {
-        	CashOrderProduct cashOrderProduct = CashOrderProductConverter.cashOrderProductEntityToModel(cashOrderProductEntity);
-        	cashOrder.getCashOrderProducts().add(cashOrderProduct);
+        if (cashOrderProductsEntity != null) {
+            for (CashOrderProductEntity cashOrderProductEntity : cashOrderProductsEntity) {
+                CashOrderProduct cashOrderProduct = CashOrderProductConverter.cashOrderProductEntityToModel(cashOrderProductEntity);
+                cashOrder.getCashOrderProducts().add(cashOrderProduct);
+            }
         }
 
         cashOrder.setCashOrderImages(new ArrayList<>());
-        for (CashOrderImageEntity cashOrderImageEntity : cashOrderImagesEntity) {
-            CashOrderImage cashOrderImage = CashOrderImageConverter.cashOrderImageEntityToModel(cashOrderImageEntity);
-            cashOrder.getCashOrderImages().add(cashOrderImage);
+        if (cashOrderImagesEntity != null) {
+            for (CashOrderImageEntity cashOrderImageEntity : cashOrderImagesEntity) {
+                CashOrderImage cashOrderImage = CashOrderImageConverter.cashOrderImageEntityToModel(cashOrderImageEntity);
+                cashOrder.getCashOrderImages().add(cashOrderImage);
+            }
         }
 
         return cashOrder;
