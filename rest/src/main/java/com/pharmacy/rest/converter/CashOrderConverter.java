@@ -24,7 +24,7 @@ public class CashOrderConverter {
         	cashOrder.getCashOrderProducts().add(cashOrderProduct);
         }
 
-        cashOrder.setCashOrderProducts(new ArrayList<>());
+        cashOrder.setCashOrderImages(new ArrayList<>());
         for (CashOrderImageEntity cashOrderImageEntity : cashOrderImagesEntity) {
             CashOrderImage cashOrderImage = CashOrderImageConverter.cashOrderImageEntityToModel(cashOrderImageEntity);
             cashOrder.getCashOrderImages().add(cashOrderImage);
