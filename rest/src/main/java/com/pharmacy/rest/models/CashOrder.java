@@ -27,4 +27,5 @@ public class CashOrder {
 	@NotNull
 	private Pharmacy pharmacy;
 	private String observations;
+	private List<CashOrderImage> cashOrderImages;
 }

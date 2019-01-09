@@ -2,6 +2,10 @@ package com.pharmacy.rest.services.cashOrder;
 
 import java.util.*;
 
+import com.pharmacy.rest.converter.CashOrderImageConverter;
+import com.pharmacy.rest.entities.CashOrderImageEntity;
+import com.pharmacy.rest.models.CashOrderImage;
+import com.pharmacy.rest.repositories.CashOrderImage.CashOrderImageJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -30,7 +34,11 @@ public class CashOrderServiceImpl implements CashOrderService {
     @Qualifier("cashOrderProductJpaRepository")
     private CashOrderProductJpaRepository cashOrderProductJpaRepository;
 
-    @Autowired
+	@Autowired
+	@Qualifier("cashOrderImageJpaRepository")
+	private CashOrderImageJpaRepository cashOrderImageJpaRepository;
+
+	@Autowired
     @Qualifier("laboratoryQueryDSLRepository")
     private LaboratoryQueryDSLRepository laboratoryQueryDSLRepository;
 
@@ -58,7 +66,7 @@ public class CashOrderServiceImpl implements CashOrderService {
 		List<CashOrderEntity> cashOrderEntities = checkUserAndGetCashOrderEntitiesByPeriod(firstDayOfTheMonth.getTime(), lastDayOfTheMonth.getTime());
 		for (CashOrderEntity cashOrderEntity : cashOrderEntities) {
 			List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
-			cashOrders.add(CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities));
+			cashOrders.add(CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities, null));
 		}
 		return cashOrders;
 	}
@@ -69,7 +77,7 @@ public class CashOrderServiceImpl implements CashOrderService {
     	List<CashOrderEntity> cashOrderEntities = checkUserAndGetCashOrderEntities(date);
         for (CashOrderEntity cashOrderEntity : cashOrderEntities) {
         	List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
-            cashOrders.add(CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities));
+            cashOrders.add(CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities, null));
         }
         return cashOrders;
     }
@@ -77,8 +85,9 @@ public class CashOrderServiceImpl implements CashOrderService {
     @Override
     public Optional<CashOrder> getCashOrder(String code) {
 		CashOrderEntity cashOrderEntity = checkUserAndGetCashOrderEntity(code);
-    	List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
-    	CashOrder cashOrder = CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities);
+    	List<CashOrderProductEntity> cashOrderProductsEntity = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
+		List<CashOrderImageEntity> cashOrderImagesEntity = null;//cashOrderImageJpaRepository.findByCashOrderCode(cashOrderEntity.getCode());
+    	CashOrder cashOrder = CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductsEntity, cashOrderImagesEntity);
         return Optional.of(cashOrder);
     }
     
@@ -92,6 +101,10 @@ public class CashOrderServiceImpl implements CashOrderService {
 					if (checkUserIfAccessLaboratoryIsGranted(cashOrderProduct.getProduct().getCode())) {
 						cashOrderProductJpaRepository.save(CashOrderProductConverter.cashOrderProductModelToEntity(cashOrderProduct, cashOrder));
 					}
+				}
+
+				for (CashOrderImage cashOrderImage : cashOrder.getCashOrderImages()) {
+					cashOrderImageJpaRepository.save(CashOrderImageConverter.cashOrderImageModelToEntity(cashOrderImage));
 				}
 			}
     		return getCashOrder(cashOrder.getCode()).get();
@@ -112,6 +125,11 @@ public class CashOrderServiceImpl implements CashOrderService {
     				cashOrderProductJpaRepository.save(CashOrderProductConverter.cashOrderProductModelToEntity(cashOrderProduct, cashOrder));
     			}
     		}
+
+			for (CashOrderImage cashOrderImage : cashOrder.getCashOrderImages()) {
+				cashOrderImageJpaRepository.save(CashOrderImageConverter.cashOrderImageModelToEntity(cashOrderImage));
+			}
+
     		updatedCashOrder = getCashOrder(cashOrder.getCode());
     	}
     	return updatedCashOrder;
@@ -122,10 +140,8 @@ public class CashOrderServiceImpl implements CashOrderService {
     	String userCode = getUserCodeFromAuthentication();
 		CashOrderEntity cashOrderEntity = cashOrderJpaRepository.findByCodeAndPharmacyUserCode(code, userCode);
     	if (cashOrderEntity != null) {
-    		List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
-    		for (CashOrderProductEntity cashOrderProductEntity : cashOrderProductEntities) {
-    			cashOrderProductJpaRepository.delete(cashOrderProductEntity);
-    		}
+			cashOrderProductJpaRepository.deleteByIdCashOrderCode(code);
+    		cashOrderImageJpaRepository.deleteByCashOrderCode(code);
     		cashOrderJpaRepository.delete(cashOrderEntity);
     		return true;
     	}

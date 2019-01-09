@@ -7,11 +7,11 @@ import java.util.Optional;
 import com.pharmacy.rest.models.CashOrder;
 
 public interface CashOrderService {
-    public List<CashOrder> searchCashOrdersByMonth(int month, int year);
-    public List<CashOrder> searchCashOrders(Date date);
-    public Optional<CashOrder> getCashOrder(String code);
-    public CashOrder saveCashOrder(CashOrder cashOrder);
-    public Optional<CashOrder> updateCashOrder(CashOrder cashOrder);
-    public boolean deleteCashOrder(String code);
+    List<CashOrder> searchCashOrdersByMonth(int month, int year);
+    List<CashOrder> searchCashOrders(Date date);
+    Optional<CashOrder> getCashOrder(String code);
+    CashOrder saveCashOrder(CashOrder cashOrder);
+    Optional<CashOrder> updateCashOrder(CashOrder cashOrder);
+    boolean deleteCashOrder(String code);
 
 }

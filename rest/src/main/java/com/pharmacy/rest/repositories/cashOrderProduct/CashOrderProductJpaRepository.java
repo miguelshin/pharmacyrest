@@ -10,6 +10,6 @@ import com.pharmacy.rest.entities.CashOrderProductEntity;
 
 @Repository("cashOrderProductJpaRepository")
 public interface CashOrderProductJpaRepository extends JpaRepository<CashOrderProductEntity, Serializable>{
-    public abstract List<CashOrderProductEntity> findByIdCashOrderCode(String cashOrderCode);
-    public abstract List<CashOrderProductEntity> deleteByIdCashOrderCode(String cashOrderCode);
+    List<CashOrderProductEntity> findByIdCashOrderCode(String cashOrderCode);
+    void deleteByIdCashOrderCode(String cashOrderCode);
 }

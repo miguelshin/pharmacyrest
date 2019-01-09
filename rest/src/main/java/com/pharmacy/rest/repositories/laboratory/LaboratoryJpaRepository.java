@@ -9,5 +9,5 @@ import com.pharmacy.rest.entities.LaboratoryEntity;
 
 @Repository("laboratoryJpaRepository")
 public interface LaboratoryJpaRepository extends JpaRepository<LaboratoryEntity, Serializable>{
-    public abstract LaboratoryEntity findByCodeAndUserCode(String code, String userCode);
+    LaboratoryEntity findByCodeAndUserCode(String code, String userCode);
 }

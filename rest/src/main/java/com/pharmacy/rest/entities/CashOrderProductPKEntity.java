@@ -20,9 +20,9 @@ public class CashOrderProductPKEntity implements Serializable {
 	private static final long serialVersionUID = 6979837682146236047L;
 	
 	@ManyToOne
-    @JoinColumn(name = "cashorder_id")
+    @JoinColumn(name = "cash_order_code")
     private CashOrderEntity cashOrder;
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_code")
     private ProductEntity product;
 }

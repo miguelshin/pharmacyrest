@@ -15,6 +15,7 @@ com/pharmacy/rest/repositories/cashOrder/CashOrderJpaRepository.class
 com/pharmacy/rest/controllers/LaboratoryRestController.class
 com/pharmacy/rest/converter/LaboratoryConverter.class
 com/pharmacy/rest/repositories/laboratory/LaboratoryQueryDSLRepository.class
+com/pharmacy/rest/entities/CashOrderImageEntity.class
 com/pharmacy/rest/entities/QPharmacyEntity.class
 com/pharmacy/rest/entities/QCashOrderProductEntity.class
 com/pharmacy/rest/models/Model.class
@@ -23,7 +24,9 @@ com/pharmacy/rest/services/laboratory/LaboratoryService.class
 com/pharmacy/rest/models/Laboratory.class
 com/pharmacy/rest/entities/PharmacyEntity.class
 com/pharmacy/rest/entities/QLaboratoryEntity.class
+com/pharmacy/rest/repositories/CashOrderImage/CashOrderImageJpaRepository.class
 com/pharmacy/rest/repositories/product/ProductJpaRepository.class
+com/pharmacy/rest/models/CashOrderImage.class
 com/pharmacy/rest/models/CashOrderProduct.class
 com/pharmacy/rest/converter/CashOrderConverter.class
 com/pharmacy/rest/entities/QCashOrderProductPKEntity.class
@@ -32,6 +35,7 @@ com/pharmacy/rest/repositories/cashOrderProduct/CashOrderProductJpaRepository.cl
 com/pharmacy/rest/entities/LaboratoryEntity.class
 com/pharmacy/rest/entities/QCashOrderEntity.class
 com/pharmacy/rest/models/CashOrder.class
+com/pharmacy/rest/entities/QCashOrderImageEntity.class
 com/pharmacy/rest/controllers/CashOrderRestController.class
 com/pharmacy/rest/controllers/main/MainController.class
 com/pharmacy/rest/services/cashOrder/CashOrderService.class
@@ -43,5 +47,6 @@ com/pharmacy/rest/services/pharmacy/PharmacyService.class
 com/pharmacy/rest/controllers/ProductRestController.class
 com/pharmacy/rest/repositories/laboratory/LaboratoryJpaRepository.class
 com/pharmacy/rest/entities/ProductEntity.class
+com/pharmacy/rest/converter/CashOrderImageConverter.class
 com/pharmacy/PharmacyApplication.class
 com/pharmacy/rest/entities/CashOrderEntity.class
