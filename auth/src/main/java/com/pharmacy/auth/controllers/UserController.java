@@ -61,7 +61,7 @@ public class UserController {
     	User userLogin = new User();
 		UserEntity userEntity = userJpaRepository.findByUsername(user.getUsername());
 		String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-		System.out.println(password);
+		System.out.println("Password!!!" + password);
 		if ((BCrypt.checkpw(password, userEntity.getPassword()))) {
 		    String token = Jwts.builder().setIssuedAt(new Date()).setIssuer(ISSUER_INFO)
 		            .setSubject(user.getUsername())
