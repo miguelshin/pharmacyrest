@@ -60,9 +60,7 @@ public class UserController {
 	public ResponseEntity<User> login(@RequestBody User user) {
     	User userLogin = new User();
 		UserEntity userEntity = userJpaRepository.findByUsername(user.getUsername());
-		String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-		System.out.println("Password!!!" + password);
-		if ((BCrypt.checkpw(password, userEntity.getPassword()))) {
+		if (BCrypt.checkpw(user.getPassword(), userEntity.getPassword())) {
 		    String token = Jwts.builder().setIssuedAt(new Date()).setIssuer(ISSUER_INFO)
 		            .setSubject(user.getUsername())
 		            .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
