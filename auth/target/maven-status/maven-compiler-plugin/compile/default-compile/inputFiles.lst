@@ -2,5 +2,6 @@
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/AuthApplication.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/repositories/UserJpaRepository.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/target/generated-sources/java/com/pharmacy/auth/entities/QUserEntity.java
+/home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/filter/CORSFilter.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/models/User.java
 /home/miguel-shin/pharmacyrest-workspace/pharmacyrest/auth/src/main/java/com/pharmacy/auth/controllers/UserController.java

@@ -65,7 +65,7 @@ public class UserController {
 		            .setSubject(user.getUsername())
 		            .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
 		            .signWith(SignatureAlgorithm.HS512, SUPER_SECRET_KEY).compact();
-		    userLogin.setUsername(user.getPassword());
+		    userLogin.setUsername(user.getUsername());
 		    userLogin.setToken(token);
 	        return new ResponseEntity<User>(userLogin, HttpStatus.OK);
 		}
