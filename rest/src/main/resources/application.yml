@@ -1,6 +1,24 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+server:
+  servlet:
+    context-path: /rest
+---
+spring:
+  profile: dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/pharmacy_db
     username: postgres
     password: postgres
@@ -15,5 +33,23 @@ spring:
           use_jdbc_metadata_defaults: false
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
 server:
-    servlet:
-      context-path: /rest
+  servlet:
+    context-path: /rest
+---
+spring:
+  profile: prod
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+server:
+  servlet:
+    context-path: /rest

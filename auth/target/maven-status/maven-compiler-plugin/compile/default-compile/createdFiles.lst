@@ -1,7 +1,7 @@
-com/pharmacy/auth/repositories/UserJpaRepository.class
-com/pharmacy/auth/entities/UserEntity.class
-com/pharmacy/auth/entities/QUserEntity.class
-com/pharmacy/auth/controllers/UserController.class
-com/pharmacy/auth/filter/CORSFilter.class
-com/pharmacy/auth/AuthApplication.class
-com/pharmacy/auth/models/User.class
+com\pharmacy\auth\entities\QUserEntity.class
+com\pharmacy\auth\filter\CORSFilter.class
+com\pharmacy\auth\models\User.class
+com\pharmacy\auth\AuthApplication.class
+com\pharmacy\auth\controllers\UserController.class
+com\pharmacy\auth\repositories\UserJpaRepository.class
+com\pharmacy\auth\entities\UserEntity.class
