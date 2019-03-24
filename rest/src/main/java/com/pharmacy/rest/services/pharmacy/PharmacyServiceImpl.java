@@ -31,8 +31,10 @@ public class PharmacyServiceImpl implements PharmacyService {
     	String userCode = getUserCodeFromAuthentication();
         List<PharmacyEntity> pharmacyEntities = pharmacyQueryDSLRepository.searchPharmacies(textName, userCode);
         List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
-        for (PharmacyEntity pharmacyEntity : pharmacyEntities) {
-            pharmacies.add(PharmacyConverter.pharmacyEntityToModel(pharmacyEntity));
+        if (pharmacyEntities != null) {
+            pharmacyEntities.forEach(pharmacyEntity -> {
+                pharmacies.add(PharmacyConverter.pharmacyEntityToModel(pharmacyEntity));
+            });
         }
         return pharmacies;
     }

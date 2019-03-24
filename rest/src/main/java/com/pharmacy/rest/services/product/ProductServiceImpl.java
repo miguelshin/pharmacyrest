@@ -36,8 +36,10 @@ public class ProductServiceImpl implements ProductService {
     	String userCode = getUserCodeFromAuthentication();
         List<ProductEntity> productEntities = productQueryDSLRepository.searchProducts(textName, userCode);
         List<Product> products = new ArrayList<Product>();
-        for (ProductEntity productEntity : productEntities) {
-            products.add(ProductConverter.productEntityToModel(productEntity));
+        if (productEntities != null) {
+            productEntities.forEach(productEntity -> {
+                products.add(ProductConverter.productEntityToModel(productEntity));
+            });
         }
         return products;
     }
@@ -47,8 +49,10 @@ public class ProductServiceImpl implements ProductService {
     	String userCode = getUserCodeFromAuthentication();
         List<ProductEntity> productEntities = productQueryDSLRepository.searchProductsByLaboratoryCode(textName, laboratoryCode, userCode);
         List<Product> products = new ArrayList<Product>();
-        for (ProductEntity productEntity : productEntities) {
-            products.add(ProductConverter.productEntityToModel(productEntity));
+        if (productEntities != null) {
+            productEntities.forEach(productEntity -> {
+                products.add(ProductConverter.productEntityToModel(productEntity));
+            });
         }
         return products;
     }

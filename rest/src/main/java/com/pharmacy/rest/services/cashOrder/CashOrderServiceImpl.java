@@ -64,9 +64,11 @@ public class CashOrderServiceImpl implements CashOrderService {
 		lastDayOfTheMonth.set(Calendar.DAY_OF_MONTH, Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH));
 
 		List<CashOrderEntity> cashOrderEntities = checkUserAndGetCashOrderEntitiesByPeriod(firstDayOfTheMonth.getTime(), lastDayOfTheMonth.getTime());
-		for (CashOrderEntity cashOrderEntity : cashOrderEntities) {
-			List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
-			cashOrders.add(CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities, null));
+		if (cashOrderEntities != null) {
+			cashOrderEntities.forEach(cashOrderEntity -> {
+				List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
+				cashOrders.add(CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities, null));
+			});
 		}
 		return cashOrders;
 	}
@@ -75,10 +77,12 @@ public class CashOrderServiceImpl implements CashOrderService {
     public List<CashOrder> searchCashOrders(Date date) {
         List<CashOrder> cashOrders = new ArrayList<CashOrder>();
     	List<CashOrderEntity> cashOrderEntities = checkUserAndGetCashOrderEntities(date);
-        for (CashOrderEntity cashOrderEntity : cashOrderEntities) {
-        	List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
-            cashOrders.add(CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities, null));
-        }
+    	if (cashOrderEntities != null) {
+    		cashOrderEntities.forEach(cashOrderEntity -> {
+				List<CashOrderProductEntity> cashOrderProductEntities = cashOrderProductJpaRepository.findByIdCashOrderCode(cashOrderEntity.getCode());
+				cashOrders.add(CashOrderConverter.cashOrderEntityToModel(cashOrderEntity, cashOrderProductEntities, null));
+			});
+		}
         return cashOrders;
     }
 
@@ -97,15 +101,15 @@ public class CashOrderServiceImpl implements CashOrderService {
     		CashOrderEntity cashOrderEntity = CashOrderConverter.cashOrderModelToEntity(cashOrder);
     		cashOrderJpaRepository.save(cashOrderEntity);
 			if (cashOrder.getCashOrderProducts() != null) {
-				for (CashOrderProduct cashOrderProduct : cashOrder.getCashOrderProducts()) {
+				cashOrder.getCashOrderProducts().forEach(cashOrderProduct -> {
 					if (checkUserIfAccessLaboratoryIsGranted(cashOrderProduct.getProduct().getCode())) {
 						cashOrderProductJpaRepository.save(CashOrderProductConverter.cashOrderProductModelToEntity(cashOrderProduct, cashOrder));
 					}
-				}
+				});
 
-				for (CashOrderImage cashOrderImage : cashOrder.getCashOrderImages()) {
+				cashOrder.getCashOrderImages().forEach(cashOrderImage -> {
 					cashOrderImageJpaRepository.save(CashOrderImageConverter.cashOrderImageModelToEntity(cashOrderImage, cashOrder));
-				}
+				});
 			}
     		return getCashOrder(cashOrder.getCode()).get();
     	}
@@ -121,14 +125,18 @@ public class CashOrderServiceImpl implements CashOrderService {
     		cashOrderEntity = CashOrderConverter.cashOrderModelToEntity(cashOrder);
     		cashOrderJpaRepository.save(cashOrderEntity);
     		cashOrderProductJpaRepository.deleteByIdCashOrderCode(cashOrderEntity.getCode());
-    		for (CashOrderProduct cashOrderProduct : cashOrder.getCashOrderProducts()) {
-    			if (checkUserIfAccessLaboratoryIsGranted(cashOrderProduct.getProduct().getCode())) {
-    				cashOrderProductJpaRepository.save(CashOrderProductConverter.cashOrderProductModelToEntity(cashOrderProduct, cashOrder));
-    			}
-    		}
+    		if (cashOrder.getCashOrderProducts() != null) {
+    			cashOrder.getCashOrderProducts().forEach(cashOrderProduct -> {
+					if (checkUserIfAccessLaboratoryIsGranted(cashOrderProduct.getProduct().getCode())) {
+						cashOrderProductJpaRepository.save(CashOrderProductConverter.cashOrderProductModelToEntity(cashOrderProduct, cashOrder));
+					}
+				});
+			}
 
-			for (CashOrderImage cashOrderImage : cashOrder.getCashOrderImages()) {
-				cashOrderImageJpaRepository.save(CashOrderImageConverter.cashOrderImageModelToEntity(cashOrderImage, cashOrder));
+    		if (cashOrder.getCashOrderImages() != null) {
+    			cashOrder.getCashOrderImages().forEach(cashOrderImage -> {
+					cashOrderImageJpaRepository.save(CashOrderImageConverter.cashOrderImageModelToEntity(cashOrderImage, cashOrder));
+				});
 			}
 
     		updatedCashOrder = getCashOrder(cashOrder.getCode());

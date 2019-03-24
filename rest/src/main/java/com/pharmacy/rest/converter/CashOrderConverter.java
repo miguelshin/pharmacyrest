@@ -20,18 +20,18 @@ public class CashOrderConverter {
         cashOrder.setPharmacy(PharmacyConverter.pharmacyEntityToModel(cashOrderEntity.getPharmacy()));
         cashOrder.setCashOrderProducts(new ArrayList<>());
         if (cashOrderProductsEntity != null) {
-            for (CashOrderProductEntity cashOrderProductEntity : cashOrderProductsEntity) {
+            cashOrderProductsEntity.forEach(cashOrderProductEntity -> {
                 CashOrderProduct cashOrderProduct = CashOrderProductConverter.cashOrderProductEntityToModel(cashOrderProductEntity);
                 cashOrder.getCashOrderProducts().add(cashOrderProduct);
-            }
+            });
         }
 
         cashOrder.setCashOrderImages(new ArrayList<>());
         if (cashOrderImagesEntity != null) {
-            for (CashOrderImageEntity cashOrderImageEntity : cashOrderImagesEntity) {
+            cashOrderImagesEntity.forEach(cashOrderImageEntity -> {
                 CashOrderImage cashOrderImage = CashOrderImageConverter.cashOrderImageEntityToModel(cashOrderImageEntity);
                 cashOrder.getCashOrderImages().add(cashOrderImage);
-            }
+            });
         }
 
         return cashOrder;
