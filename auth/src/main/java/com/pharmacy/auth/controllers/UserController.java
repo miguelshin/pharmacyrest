@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.pharmacy.common.authentication.utils.Constants.ISSUER_INFO;
 import static com.pharmacy.common.authentication.utils.Constants.SUPER_SECRET_KEY;
@@ -24,6 +21,8 @@ import com.pharmacy.auth.repositories.UserJpaRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@RequestMapping("/login")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 @RestController
 public class UserController {
 
@@ -71,12 +70,4 @@ public class UserController {
 		}
         return new ResponseEntity<User>(HttpStatus.FORBIDDEN);
 	}
-/*
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<User> savePharmacy(@RequestBody User pharmacy) {
-        pharmacy.setCode(UUID.randomUUID().toString());
-        User savedPharmacy = pharmacyService.savePharmacy(pharmacy);
-        return new ResponseEntity<User>(savedPharmacy, HttpStatus.ACCEPTED);
-    }
-*/
 }

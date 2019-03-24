@@ -9,5 +9,5 @@ import com.pharmacy.auth.entities.UserEntity;
 
 @Repository("userJpaRepository")
 public interface UserJpaRepository extends JpaRepository<UserEntity, Serializable>{
-    public abstract UserEntity findByUsername(String username);
+    UserEntity findByUsername(String username);
 }
