@@ -101,9 +101,9 @@ public class CashOrderRestController {
     @RequestMapping(value = CODE_ROOT_PATH, method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteCashOrder(@PathVariable(value="code") String code) {
     	if (cashOrderService.deleteCashOrder(code)) {
-    		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     	} else {
-    		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     	}
     }
 }
