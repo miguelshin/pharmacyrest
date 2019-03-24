@@ -45,7 +45,7 @@ public class CashOrderRestController {
 	public ResponseEntity<List<CashOrder>> searchCashOrders(@PathVariable(value="month", required=false) int month,
 															@PathVariable(value="year", required=false) int year) {
 		List<CashOrder> cashOrders = cashOrderService.searchCashOrdersByMonth(month, year);
-		return new ResponseEntity<>(cashOrders, HttpStatus.OK);
+		return new ResponseEntity<List<CashOrder>>(cashOrders, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = CODE_ROOT_PATH, method = RequestMethod.GET)
