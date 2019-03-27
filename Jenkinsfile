@@ -19,5 +19,7 @@ node {
 
    // -- Compilando
    echo 'Compilando aplicación'
+   mvn clean compile
 
+ 
 }
