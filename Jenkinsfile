@@ -17,7 +17,7 @@ node {
    echo 'Descargando código de SCM'
    // -- Compilando
    echo 'Compilando aplicación'
-   bat "mvn clean compile"
+   mvn clean compile
    
    // ------------------------------------
    // -- ETAPA: Test
