@@ -15,7 +15,6 @@ node {
    
    // -- Descarga código desde SCM
    echo 'Descargando código de SCM'
-   bat "rmdir *"
    // -- Compilando
    echo 'Compilando aplicación'
    bat 'mvn clean compile'
