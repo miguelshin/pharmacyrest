@@ -15,10 +15,7 @@ node {
    
    // -- Descarga código desde SCM
    echo 'Descargando código de SCM'
-   bat '''
-         sh
-         rm -rf *
-        '''
+   bat "C:\\Program Files\\Git\\bin\\sh.exe rm -rf *"
    
    // -- Compilando
    echo 'Compilando aplicación'
