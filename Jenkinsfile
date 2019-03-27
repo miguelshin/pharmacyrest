@@ -19,6 +19,7 @@ node {
 
    // -- Compilando
    echo 'Compilando aplicación'
+   println "sh mvn --version".execute().text
    bat "mvn clean install"
 
 
