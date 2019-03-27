@@ -19,7 +19,7 @@ node {
 
    // -- Compilando
    echo 'Compilando aplicación'
-   cmd mvn clean compile
+   bat "mvn clean install"
 
 
 }
