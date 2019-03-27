@@ -15,8 +15,10 @@ node {
    
    // -- Descarga código desde SCM
    echo 'Descargando código de SCM'
-   bat "C:\\Program Files\\Git\\bin\\sh.exe rm -rf *"
-   
+   bat '''
+           " sh" +
+           " rm -rf *"
+       '''
    // -- Compilando
    echo 'Compilando aplicación'
    sh 'mvn clean compile'
