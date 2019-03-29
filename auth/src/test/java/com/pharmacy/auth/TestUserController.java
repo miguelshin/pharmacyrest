@@ -41,7 +41,7 @@ public class TestUserController {
         UserEntity userEntity = new UserEntity("prueba@pruebamail.com", "$2a$10$z4HSwr1bqfruCWkkIkyXruFLT6houJjnpHrNFKOP0thEYjrnhPq2W");
         when(userJpaRepository.findByUsername(any(String.class))).thenReturn(userEntity);
 
-        User user = new User("prueba@pruebamail.com", "pruebaa", null);
+        User user = new User("prueba@pruebamail.com", "prueba", null);
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login")
                 .header("Origin","*")
