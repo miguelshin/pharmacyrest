@@ -19,5 +19,5 @@ node {
 
    // -- Compilando
    echo 'Compilando aplicación'
-   bat "mvn clean install"
+   bat "${mvnHome}\\\\bin\\\\mvn clean install"
 }
