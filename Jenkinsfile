@@ -20,28 +20,7 @@ node {
    // -- Compilando
    echo 'Compilando aplicación'
    bat "${mvnHome}\\bin\\mvn -B verify"
-   mvn clean compile
-   // ------------------------------------
-   // -- ETAPA: Test
-   // ------------------------------------
-   stage 'Test'
-   echo 'Ejecutando tests'
-   try{
-      bat 'mvn verify'
-      step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
-   }catch(err) {
-      step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
-      if (currentBuild.result == 'UNSTABLE')
-         currentBuild.result = 'FAILURE'
-      throw err
-   }
-
-   // ------------------------------------
-   // -- ETAPA: Instalar
-   // ------------------------------------
-   stage 'Instalar'
-   echo 'Instala el paquete generado en el repositorio maven'
-   bat 'mvn install -Dmaven.test.skip=true'
+   mvn clean install compile
 
    // ------------------------------------
    // -- ETAPA: Archivar
