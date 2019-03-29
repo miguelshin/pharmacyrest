@@ -19,13 +19,5 @@ node {
 
    // -- Compilando
    echo 'Compilando aplicación'
-   bat "${mvnHome}\\bin\\mvn -B verify"
-   mvn clean install compile
-
-   // ------------------------------------
-   // -- ETAPA: Archivar
-   // ------------------------------------
-   stage 'Archivar'
-   echo 'Archiva el paquete el paquete generado en Jenkins'
-   step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
+   bat "mvn clean install"
 }
