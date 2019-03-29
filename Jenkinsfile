@@ -18,6 +18,13 @@ node {
    checkout scm
 
    // -- Compilando
+   echo 'Tests'
+   bat "${mvnHome}\\\\bin\\\\mvn tests"
+
+   stage 'Tests'
+
+   // -- Compilando
    echo 'Compilando aplicación'
-   bat "${mvnHome}\\\\bin\\\\mvn clean install"
+   bat "${mvnHome}\\\\bin\\\\mvn clean install -Dmaven.test.skip"
+
 }
