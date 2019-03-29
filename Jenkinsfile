@@ -4,7 +4,7 @@ node {
    // ------------------------------------
    // -- ETAPA: Compilar
    // ------------------------------------
-   stage 'Compilar'
+   stage 'Tests'
    echo 'Configurando variables'
    def mvnHome = tool 'M3'
    env.PATH = "${mvnHome}\bin:${env.PATH}"
@@ -17,7 +17,7 @@ node {
    echo 'Tests'
    bat "${mvnHome}\\\\bin\\\\mvn test"
 
-   stage 'Tests'
+   stage 'Compilar'
    // -- Compilando
    echo 'Compilando aplicación'
    bat "${mvnHome}\\\\bin\\\\mvn clean install -Dmaven.test.skip"
