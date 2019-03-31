@@ -4,7 +4,6 @@ import java.util.*;
 
 import com.pharmacy.rest.converter.CashOrderImageConverter;
 import com.pharmacy.rest.entities.CashOrderImageEntity;
-import com.pharmacy.rest.models.CashOrderImage;
 import com.pharmacy.rest.repositories.CashOrderImage.CashOrderImageJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +16,6 @@ import com.pharmacy.rest.converter.CashOrderProductConverter;
 import com.pharmacy.rest.entities.CashOrderEntity;
 import com.pharmacy.rest.entities.CashOrderProductEntity;
 import com.pharmacy.rest.models.CashOrder;
-import com.pharmacy.rest.models.CashOrderProduct;
 import com.pharmacy.rest.repositories.cashOrder.CashOrderJpaRepository;
 import com.pharmacy.rest.repositories.cashOrderProduct.CashOrderProductJpaRepository;
 import com.pharmacy.rest.repositories.laboratory.LaboratoryQueryDSLRepository;
@@ -97,6 +95,9 @@ public class CashOrderServiceImpl implements CashOrderService {
     
     @Override
     public CashOrder saveCashOrder(CashOrder cashOrder) {
+		Objects.requireNonNull(cashOrder.getDate());
+		Objects.requireNonNull(cashOrder.getPharmacy());
+		Objects.requireNonNull(cashOrder.getCashOrderProducts());
     	if (checkUserIfAccessPharmacyIsGranted(cashOrder.getPharmacy().getCode())) {
     		CashOrderEntity cashOrderEntity = CashOrderConverter.cashOrderModelToEntity(cashOrder);
     		cashOrderJpaRepository.save(cashOrderEntity);
@@ -119,6 +120,10 @@ public class CashOrderServiceImpl implements CashOrderService {
     
     @Override
     public Optional<CashOrder> updateCashOrder(CashOrder cashOrder) {
+		Objects.requireNonNull(cashOrder.getDate());
+		Objects.requireNonNull(cashOrder.getPharmacy());
+		Objects.requireNonNull(cashOrder.getCashOrderProducts());
+
     	Optional<CashOrder> updatedCashOrder = Optional.empty();
 		CashOrderEntity cashOrderEntity = checkUserAndGetCashOrderEntity(cashOrder.getCode());
     	if (cashOrderEntity != null) {
